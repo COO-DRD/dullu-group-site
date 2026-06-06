@@ -30,31 +30,31 @@ const builds = [
 
 export default function WhatIBuild() {
   return (
-    <section className="py-24 border-b border-cognac/20">
+    <section className="py-24 border-b border-gold/20">
       <div className="max-w-6xl mx-auto px-6">
-        <p className="text-xs tracking-[0.2em] text-cognac uppercase mb-6">
+        <p className="text-xs font-semibold tracking-[0.25em] text-gold uppercase mb-6">
           What I build
         </p>
 
-        <h2 className="font-display text-4xl md:text-5xl font-bold text-bean leading-tight mb-16 max-w-xl">
+        <h2 className="font-sans font-black text-4xl md:text-5xl text-offwhite leading-tight uppercase mb-16 max-w-xl tracking-tight">
           Three ways to put the weapons to work.
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-cognac/20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-gold/10">
           {builds.map((b) => (
-            <div key={b.label} className="bg-parchment p-8 flex flex-col">
-              <p className="text-xs tracking-[0.15em] text-cognac uppercase mb-4">{b.label}</p>
-              <h3 className="font-display text-xl font-bold text-bean mb-4 leading-snug">
+            <div key={b.label} className="bg-ink p-8 flex flex-col">
+              <p className="text-xs font-semibold tracking-[0.2em] text-gold uppercase mb-4">{b.label}</p>
+              <h3 className="font-bold text-offwhite text-lg mb-4 leading-snug">
                 {b.heading}
               </h3>
-              <p className="text-sm text-bean-muted leading-relaxed mb-8 flex-1">{b.body}</p>
+              <p className="font-light text-grey text-sm leading-relaxed mb-8 flex-1">{b.body}</p>
               <div>
-                <p className="text-xs text-bean-muted mb-4">{b.price}</p>
+                <p className="text-xs text-grey mb-4">{b.price}</p>
                 <a
                   href={b.href}
                   target={b.external ? "_blank" : undefined}
                   rel={b.external ? "noopener noreferrer" : undefined}
-                  className="inline-block border border-cognac text-cognac px-6 py-3 text-sm hover:bg-cognac hover:text-parchment transition-colors"
+                  className="inline-block border border-gold text-gold font-semibold text-sm tracking-wide px-6 py-3 hover:bg-gold hover:text-ink transition-all"
                 >
                   {b.cta} →
                 </a>

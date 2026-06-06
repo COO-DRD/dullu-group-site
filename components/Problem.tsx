@@ -29,27 +29,27 @@ const leaks = [
 
 export default function Problem() {
   return (
-    <section className="bg-bean py-24">
+    <section className="bg-ink-light py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <p className="text-xs tracking-[0.2em] text-cognac uppercase mb-6">
+        <p className="text-xs font-semibold tracking-[0.25em] text-gold uppercase mb-6">
           Where the money is going
         </p>
 
-        <h2 className="font-display text-4xl md:text-5xl font-bold text-parchment leading-tight mb-6 max-w-2xl">
+        <h2 className="font-sans font-black text-4xl md:text-5xl text-offwhite leading-tight uppercase mb-6 max-w-2xl tracking-tight">
           Most Kenyan businesses aren&apos;t losing money because their product is bad.
         </h2>
 
-        <p className="text-bean-faint text-lg mb-16 max-w-xl">
+        <p className="font-light text-grey text-lg mb-16 max-w-xl">
           They are losing it through six specific leaks. Count your yes answers.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-bean-subtle">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gold/10">
           {leaks.map((leak) => (
-            <div key={leak.title} className="bg-bean p-8 hover:bg-bean-subtle transition-colors">
-              <h3 className="font-display text-xl font-bold text-cognac mb-3">
+            <div key={leak.title} className="bg-ink-light p-8 hover:bg-ink transition-colors">
+              <h3 className="font-sans font-bold text-gold text-lg mb-3 uppercase tracking-wide">
                 {leak.title}
               </h3>
-              <p className="text-sm text-bean-faint leading-relaxed">
+              <p className="font-light text-grey text-sm leading-relaxed">
                 {leak.body}
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function Problem() {
         <div className="mt-12">
           <Link
             href="/shop?product=african-business-audit"
-            className="inline-block border border-parchment/40 text-parchment px-8 py-4 text-sm tracking-wide hover:border-parchment transition-colors"
+            className="inline-block border border-gold/40 text-offwhite font-medium text-sm tracking-[0.1em] uppercase px-8 py-4 hover:border-gold transition-colors"
           >
             Take the free 2-minute audit →
           </Link>
