@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSessionCookie, hashPassword } from "@/lib/auth";
 import { sendEmail } from "@/lib/email";
 import { registrationWelcomeHtml, registrationWelcomeSubject } from "@/lib/email-templates";
+import { rateLimit, getIp } from "@/lib/rate-limit";
 
 const SUPA = process.env.SUPABASE_URL;
 const KEY  = process.env.SUPABASE_SERVICE_KEY;
@@ -29,6 +30,14 @@ async function createUser(email: string, name: string, passwordHash: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const ip = getIp(req);
+  if (!rateLimit(`register:${ip}`, 5).ok) {
+    return NextResponse.json(
+      { error: "Too many attempts. Wait a minute and try again." },
+      { status: 429 }
+    );
+  }
+
   try {
     const { name, email, password } = await req.json();
 

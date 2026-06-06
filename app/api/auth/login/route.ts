@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSessionCookie, verifyPassword } from "@/lib/auth";
+import { rateLimit, getIp } from "@/lib/rate-limit";
 
 const SUPA = process.env.SUPABASE_URL;
 const KEY  = process.env.SUPABASE_SERVICE_KEY;
+
+const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 async function findUser(email: string) {
   const res = await fetch(
@@ -15,6 +18,14 @@ async function findUser(email: string) {
 }
 
 export async function POST(req: NextRequest) {
+  const ip = getIp(req);
+  if (!rateLimit(`login:${ip}`, 10).ok) {
+    return NextResponse.json(
+      { error: "Too many attempts. Wait a minute and try again." },
+      { status: 429 }
+    );
+  }
+
   try {
     const { email, password } = await req.json();
     if (!email || !password) {
@@ -23,11 +34,13 @@ export async function POST(req: NextRequest) {
 
     const user = await findUser(email.toLowerCase().trim());
     if (!user) {
+      await delay(500);
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
     }
 
     const valid = await verifyPassword(password, user.password_hash);
     if (!valid) {
+      await delay(500);
       return NextResponse.json({ error: "Invalid email or password." }, { status: 401 });
     }
 

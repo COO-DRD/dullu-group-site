@@ -77,7 +77,7 @@ export default function CheckoutModal({
       .then((data: { error?: string; downloadUrl?: string; alreadyOwned?: boolean }) => {
         if (data.downloadUrl) {
           setDownloadUrl(data.downloadUrl);
-          recordPurchase(user.email);
+          loadRecs();
           setStep("success");
         } else {
           setErrorMsg(data.alreadyOwned
@@ -135,7 +135,7 @@ export default function CheckoutModal({
             return;
           }
           setDownloadUrl(result.downloadUrl ?? null);
-          recordPurchase(email.trim());
+          loadRecs();
           setStep("success");
         },
         onError: () => {
@@ -160,16 +160,7 @@ export default function CheckoutModal({
     }
   }, [step, product.slug, email, name]);
 
-  function recordPurchase(emailAddr: string) {
-    fetch("/api/shop/purchase", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        user_email:   emailAddr,
-        product_slug: product.slug,
-        product_id:   product.id,
-      }),
-    }).catch(() => {});
+  function loadRecs() {
     fetch(`/api/shop/recs/${product.slug}`)
       .then((r) => r.json())
       .then(({ recs: r }: { recs: RecProduct[] }) => setRecs(r ?? []))
@@ -187,7 +178,7 @@ export default function CheckoutModal({
         if (data.status === "paid" && data.downloadUrl) {
           clearInterval(pollRef.current!);
           setDownloadUrl(data.downloadUrl);
-          recordPurchase(email);
+          loadRecs();
           setStep("success");
         } else if (["failed", "expired", "cancelled"].includes(data.status)) {
           clearInterval(pollRef.current!);
@@ -240,7 +231,7 @@ export default function CheckoutModal({
       }
       if (isFree && data.downloadUrl) {
         setDownloadUrl(data.downloadUrl);
-        recordPurchase(email.trim());
+        loadRecs();
         setStep("success");
         return;
       }
