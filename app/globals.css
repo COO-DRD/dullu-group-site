@@ -9,19 +9,6 @@
   --color-ink-light: #141414;
 
   --font-sans: var(--font-montserrat, "Montserrat", sans-serif);
-
-  --animate-marquee:  marquee 42s linear infinite;
-  --animate-fade-up:  fadeUp 0.75s ease forwards;
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 html {
@@ -34,9 +21,4 @@ body {
   font-family: var(--font-montserrat, "Montserrat", sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.bg-grid {
-  background-image: radial-gradient(circle, rgba(201, 160, 44, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
 }
