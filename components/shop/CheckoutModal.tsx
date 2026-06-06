@@ -41,6 +41,7 @@ export default function CheckoutModal({
   const [name, setName]               = useState(user?.name ?? "");
   const [email, setEmail]             = useState(user?.email ?? "");
   const [phone, setPhone]             = useState("");
+  const [whatsapp, setWhatsapp]       = useState("");
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [errorMsg, setErrorMsg]       = useState("");
   const [recs, setRecs]               = useState<RecProduct[]>([]);
@@ -76,6 +77,7 @@ export default function CheckoutModal({
               email:         email.trim(),
               name:          name.trim(),
               paymentMethod: "paypal",
+              ...(whatsapp.trim() ? { phone: whatsapp.trim() } : {}),
             }),
           });
           const data = await res.json() as { error?: string; orderId?: string; paypalOrderId?: string };
@@ -183,6 +185,7 @@ export default function CheckoutModal({
         paymentMethod: isFree ? "free" : "mpesa",
       };
       if (!isFree) body.phone = phone.trim();
+      if (isFree && whatsapp.trim()) body.phone = whatsapp.trim();
 
       const res  = await fetch(`${API}/api/checkout`, {
         method:  "POST",
@@ -265,6 +268,23 @@ export default function CheckoutModal({
               </div>
             ))}
 
+            {isFree && (
+              <div>
+                <label className="block font-sans text-[10px] font-semibold tracking-[0.14em] uppercase mb-2" style={{ color: "#888888" }}>
+                  WhatsApp Number <span style={{ color: "#CCCCCC", fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>— optional</span>
+                </label>
+                <input
+                  type="tel" value={whatsapp}
+                  onChange={(e) => setWhatsapp(e.target.value)}
+                  placeholder="07XX XXX XXX"
+                  className={inputCls} style={inputStyle}
+                />
+                <p className="font-sans text-[10px] mt-1.5" style={{ color: "#CCCCCC" }}>
+                  Get updates and tips on WhatsApp.
+                </p>
+              </div>
+            )}
+
             {!isFree && (
               <>
                 {/* Payment method tabs */}
@@ -305,9 +325,22 @@ export default function CheckoutModal({
                 )}
 
                 {payMethod === "paypal" && (
-                  <p className="font-sans text-[10px] leading-relaxed" style={{ color: "#AAAAAA" }}>
-                    You&apos;ll be taken to PayPal to complete payment. Amount charged in USD.
-                  </p>
+                  <>
+                    <p className="font-sans text-[10px] leading-relaxed" style={{ color: "#AAAAAA" }}>
+                      You&apos;ll be taken to PayPal to complete payment. Amount charged in USD.
+                    </p>
+                    <div>
+                      <label className="block font-sans text-[10px] font-semibold tracking-[0.14em] uppercase mb-2" style={{ color: "#888888" }}>
+                        WhatsApp Number <span style={{ color: "#CCCCCC", fontWeight: 400, textTransform: "none", letterSpacing: 0 }}>— optional</span>
+                      </label>
+                      <input
+                        type="tel" value={whatsapp}
+                        onChange={(e) => setWhatsapp(e.target.value)}
+                        placeholder="07XX XXX XXX"
+                        className={inputCls} style={inputStyle}
+                      />
+                    </div>
+                  </>
                 )}
               </>
             )}

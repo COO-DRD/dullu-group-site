@@ -8,9 +8,9 @@ const products = [
 
 const connect = [
   { label: "Book a Call", href: "/office",                          ext: false },
-  { label: "Articles",    href: "/articles",                        ext: false },
   { label: "YouTube",     href: "https://youtube.com/@Dr_Dullu",    ext: true  },
   { label: "Instagram",   href: "https://instagram.com/dr.dullu_",  ext: true  },
+  { label: "TikTok",      href: "https://tiktok.com/@dr.dullu",     ext: true  },
 ];
 
 export default function Footer() {
@@ -109,22 +109,13 @@ export default function Footer() {
           <p className="font-sans text-xs font-light" style={{ color: "#AAAAAA" }}>
             © 2026 DR.DULLU · KILIFI, KENYA
           </p>
-          <div className="flex gap-6">
-            {[
-              { label: "Privacy", href: "/privacy" },
-              { label: "Terms",   href: "/terms"   },
-              { label: "Contact", href: "/contact"  },
-            ].map(({ label, href }) => (
-              <Link
-                key={label}
-                href={href}
-                className="font-sans text-xs font-light transition-colors hover:text-amber"
-                style={{ color: "#AAAAAA" }}
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
+          <a
+            href="mailto:shop@dullugroup.co.ke"
+            className="font-sans text-xs font-light transition-colors hover:text-amber"
+            style={{ color: "#AAAAAA" }}
+          >
+            shop@dullugroup.co.ke
+          </a>
         </div>
 
       </div>

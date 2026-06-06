@@ -73,3 +73,9 @@ input:focus-visible, textarea:focus-visible {
   outline: 2px solid #D4580A;
   outline-offset: 0;
 }
+
+/* Mobile photo adjustments — reduce the zoomed-in feel on portrait screens */
+@media (max-width: 767px) {
+  .hero-photo     { object-position: 50% 30% !important; }
+  .about-landscape { background-position: 40% center !important; }
+}

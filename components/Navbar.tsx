@@ -51,7 +51,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           {[
             { label: "Shop",     href: "/shop" },
-            { label: "Articles", href: "/articles" },
+            { label: "YouTube",  href: "https://youtube.com/@Dr_Dullu", ext: true },
             { label: "4unter",   href: "https://4unter.dullugroup.co.ke", ext: true },
           ].map(({ label, href, ext }) => (
             ext ? (
@@ -148,28 +148,28 @@ export default function Navbar() {
           }}
         >
           <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-5">
+            <Link
+              href="/shop"
+              onClick={() => setOpen(false)}
+              className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
+            >
+              Shop
+            </Link>
             {[
-              { label: "Shop",     href: "/shop",     ext: false },
-              { label: "Articles", href: "/articles", ext: false },
+              { label: "YouTube", href: "https://youtube.com/@Dr_Dullu" },
+              { label: "4unter",  href: "https://4unter.dullugroup.co.ke" },
             ].map(({ label, href }) => (
-              <Link
+              <a
                 key={label}
                 href={href}
-                onClick={() => setOpen(false)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
+                onClick={() => setOpen(false)}
               >
-                {label}
-              </Link>
+                {label} ↗
+              </a>
             ))}
-            <a
-              href="https://4unter.dullugroup.co.ke"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
-              onClick={() => setOpen(false)}
-            >
-              4unter
-            </a>
 
             {user ? (
               <>

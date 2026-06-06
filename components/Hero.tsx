@@ -82,7 +82,7 @@ export default function Hero() {
             src="/dr-wide.jpg"
             fill
             alt="Dr. Dullu"
-            className="object-cover"
+            className="object-cover hero-photo"
             style={{ objectPosition: "center 20%" }}
             priority
             quality={100}
@@ -110,7 +110,7 @@ export default function Hero() {
           <span
             className="font-cinematic leading-none tracking-[0.18em] whitespace-nowrap"
             style={{
-              fontSize: "clamp(7rem,14vw,18rem)",
+              fontSize: "clamp(1rem,13vw,18rem)",
               color: "#F8F5EB",
               fontWeight: 600,
             }}

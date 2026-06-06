@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import type { Product } from "@/app/shop/page";
 import { useAuth } from "@/context/AuthContext";
 import ProductCard from "./ProductCard";
 import CheckoutModal from "./CheckoutModal";
+
+const SHOP_API = "https://dullu-shop-api.dullugroup.co.ke";
 
 const TABS = [
   { key: "all",       label: "All"       },
@@ -14,10 +16,21 @@ const TABS = [
   { key: "corporate", label: "Corporate" },
 ];
 
-export function ShopClient({ products }: { products: Product[] }) {
-  const [tab, setTab]         = useState("all");
+export function ShopClient({ products: initial }: { products: Product[] }) {
+  const [tab, setTab]           = useState("all");
   const [selected, setSelected] = useState<Product | null>(null);
-  const { user }              = useAuth();
+  const [products, setProducts] = useState<Product[]>(initial);
+  const [loading, setLoading]   = useState(initial.length === 0);
+  const { user }                = useAuth();
+
+  useEffect(() => {
+    if (initial.length > 0) return;
+    fetch(`${SHOP_API}/api/products`)
+      .then((r) => r.json())
+      .then((data: Product[]) => setProducts(data))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [initial.length]);
 
   const filtered = products.filter((p) => {
     if (tab === "all")     return true;
@@ -80,7 +93,11 @@ export function ShopClient({ products }: { products: Product[] }) {
         ))}
       </div>
 
-      {filtered.length === 0 ? (
+      {loading ? (
+        <div className="py-24 flex justify-center">
+          <div className="w-6 h-6 rounded-full border-2 animate-spin" style={{ borderColor: "#F0EDE8", borderTopColor: "#D4580A" }} />
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="py-24 text-center">
           <p className="font-sans font-light" style={{ color: "#888888" }}>No products found.</p>
         </div>

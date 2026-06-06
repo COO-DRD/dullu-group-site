@@ -65,6 +65,7 @@ export default function About() {
       <section style={{ position: "relative" }}>
         <div
           ref={photoRef}
+          className="about-landscape"
           style={{
             height: "100vh",
             backgroundImage: "url(/dr-landscape.jpg)",

@@ -65,79 +65,86 @@ export default function ProductCard({
       onMouseEnter={(e) => { if (!open) (e.currentTarget as HTMLDivElement).style.backgroundColor = "#FFF8F4"; }}
       onMouseLeave={(e) => { if (!open) (e.currentTarget as HTMLDivElement).style.backgroundColor = "#FFFFFF"; }}
     >
-      {/* Collapsed row — click to expand */}
-      <button
-        className="w-full text-left py-16 md:py-20 px-6 cursor-pointer"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-      >
-        <div className="max-w-6xl mx-auto flex flex-col gap-6">
+      {/* Collapsed header — click to expand */}
+      <div className="py-12 md:py-16 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col gap-5">
 
-          {/* Number + tags */}
-          <div className="flex items-center gap-5">
-            <span
-              className="font-cinematic font-light leading-none select-none"
-              style={{ fontSize: "clamp(3rem,7vw,6rem)", color: "#F0EDE8" }}
-            >
-              {n}
-            </span>
-            <div className="flex-1 h-px" style={{ backgroundColor: "#F0EDE8" }} />
-            <span className="font-sans font-semibold tracking-[0.18em] uppercase" style={{ fontSize: "10px", color: "#1B3D8F" }}>
-              {audienceLabel}
-            </span>
-            <span
-              className="font-sans font-semibold tracking-[0.12em] uppercase px-2 py-1 shrink-0"
-              style={isFree
-                ? { backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "10px" }
-                : { border: "1px solid #D4580A", color: "#D4580A", fontSize: "10px" }}
-            >
-              {isFree ? "Free" : `KES ${product.price_kes.toLocaleString()}`}
-            </span>
-          </div>
+          {/* Number + tags row — click to toggle */}
+          <button
+            className="w-full text-left cursor-pointer"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+          >
+            <div className="flex items-center gap-5">
+              <span
+                className="font-cinematic font-light leading-none select-none"
+                style={{ fontSize: "clamp(3rem,7vw,6rem)", color: "#F0EDE8" }}
+              >
+                {n}
+              </span>
+              <div className="flex-1 h-px" style={{ backgroundColor: "#F0EDE8" }} />
+              <span className="font-sans font-semibold tracking-[0.18em] uppercase" style={{ fontSize: "10px", color: "#1B3D8F" }}>
+                {audienceLabel}
+              </span>
+              <span
+                className="font-sans font-semibold tracking-[0.12em] uppercase px-2 py-1 shrink-0"
+                style={isFree
+                  ? { backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "10px" }
+                  : { border: "1px solid #D4580A", color: "#D4580A", fontSize: "10px" }}
+              >
+                {isFree ? "Free" : `KES ${product.price_kes.toLocaleString()}`}
+              </span>
+            </div>
+          </button>
 
-          {/* Title + expand toggle */}
-          <div className="flex items-start justify-between gap-4">
-            <h3
-              className="font-sans font-black uppercase tracking-tight leading-tight"
-              style={{ fontSize: "clamp(1.8rem,4.5vw,4rem)", color: "#111111" }}
-            >
-              {product.title}
-            </h3>
-            <span
-              className="shrink-0 mt-2 font-light transition-transform duration-300"
-              style={{ fontSize: "1.6rem", color: "#D4580A", lineHeight: 1, display: "block",
-                transform: open ? "rotate(45deg)" : "none" }}
-            >
-              +
-            </span>
-          </div>
+          {/* Title + expand toggle — click to toggle */}
+          <button
+            className="w-full text-left cursor-pointer"
+            onClick={() => setOpen((o) => !o)}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <h3
+                className="font-sans font-black uppercase tracking-tight leading-tight"
+                style={{ fontSize: "clamp(1.8rem,4.5vw,4rem)", color: "#111111" }}
+              >
+                {product.title}
+              </h3>
+              <span
+                className="shrink-0 mt-2 font-light transition-transform duration-300"
+                style={{ fontSize: "1.6rem", color: "#D4580A", lineHeight: 1, display: "block",
+                  transform: open ? "rotate(45deg)" : "none" }}
+              >
+                +
+              </span>
+            </div>
+          </button>
 
-          {/* Tagline + ghost CTA — collapsed only */}
+          {/* Tagline + CTAs — always visible, outside any toggle button */}
           {!open && (
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 pt-1">
               <p className="font-sans font-light text-lg leading-relaxed" style={{ color: "#555555", maxWidth: "42rem" }}>
                 {product.tagline}
               </p>
-              <div className="flex items-center gap-3 shrink-0">
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
                 <Link
                   href={`/shop/${product.slug}`}
-                  onClick={(e) => e.stopPropagation()}
                   className="font-sans font-semibold tracking-[0.16em] uppercase px-4 py-2 transition-colors"
                   style={{ color: "#AAAAAA", fontSize: "10px", border: "1px solid #DDDDDD" }}
                 >
                   Details
                 </Link>
-                <span
-                  className="font-sans font-bold tracking-[0.2em] uppercase px-7 py-3 border"
+                <button
+                  onClick={onBuy}
+                  className="font-sans font-bold tracking-[0.2em] uppercase px-7 py-3 border transition-all hover:brightness-110 cursor-pointer"
                   style={{ borderColor: "#D4580A", color: "#D4580A", fontSize: "11px" }}
                 >
                   {isFree ? "Get for Free →" : "Buy Now →"}
-                </span>
+                </button>
               </div>
             </div>
           )}
         </div>
-      </button>
+      </div>
 
       {/* Expanded panel */}
       <div
@@ -204,13 +211,13 @@ export default function ProductCard({
                   </p>
                   <div className="mt-5 border-t" style={{ borderColor: "#F0EDE8" }}>
                     {recs.map((rec) => (
-                      <div
+                      <Link
                         key={rec.slug}
-                        className="flex items-start justify-between gap-6 py-6 border-b"
+                        href={`/shop/${rec.slug}`}
+                        className="flex items-start justify-between gap-6 py-6 border-b group transition-colors"
                         style={{ borderColor: "#F0EDE8" }}
                       >
                         <div className="flex flex-col gap-1 min-w-0">
-                          {/* Reason label */}
                           <span
                             className="font-sans font-semibold tracking-[0.16em] uppercase"
                             style={{ fontSize: "9px",
@@ -218,7 +225,7 @@ export default function ProductCard({
                           >
                             {rec.reason}
                           </span>
-                          <p className="font-sans font-bold text-base leading-snug" style={{ color: "#111111" }}>
+                          <p className="font-sans font-bold text-base leading-snug group-hover:text-amber transition-colors" style={{ color: "#111111" }}>
                             {rec.title}
                           </p>
                           <p className="font-sans font-light text-sm leading-snug mt-0.5" style={{ color: "#888888" }}>
@@ -233,7 +240,7 @@ export default function ProductCard({
                         >
                           {rec.price_kes === 0 ? "Free" : `KES ${rec.price_kes.toLocaleString()}`}
                         </span>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 </div>

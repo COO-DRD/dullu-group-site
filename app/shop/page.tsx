@@ -3,6 +3,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "The Shop — DR.DULLU",
   description:
@@ -30,7 +33,7 @@ async function getProducts(): Promise<Product[]> {
   try {
     const res = await fetch(
       "https://dullu-shop-api.dullugroup.co.ke/api/products",
-      { next: { revalidate: 120 } }
+      { cache: "no-store" }
     );
     if (!res.ok) return [];
     return res.json();
