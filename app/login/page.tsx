@@ -115,6 +115,16 @@ function LoginForm() {
               <p className="font-sans text-sm" style={{ color: "#D4580A" }}>{error}</p>
             )}
 
+            <div className="flex justify-end">
+              <Link
+                href="/forgot-password"
+                className="font-sans text-xs hover:underline"
+                style={{ color: "#AAAAAA" }}
+              >
+                Forgot password?
+              </Link>
+            </div>
+
             <button
               type="submit"
               disabled={busy}
