@@ -2,48 +2,49 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Arr from "@/components/Arr";
 
 const leaks = [
   {
     n:    "01",
     title: "The Response Gap",
     body:  "Leads message you and buy from your competitor before you reply. Every hour of silence is a closed deal somewhere else.",
-    cta:   "Fix this →",
+    cta:   "Fix this",
     href:  "/shop",
   },
   {
     n:    "02",
     title: "The Proposal Problem",
     body:  "Quotes sent over WhatsApp chat. They scroll past it. You never had a real chance.",
-    cta:   "See the fix →",
+    cta:   "See the fix",
     href:  "/shop",
   },
   {
     n:    "03",
     title: "The Silent Quote",
     body:  "The deal didn't die because they said no. It died because you never followed up.",
-    cta:   "Automate follow-up →",
+    cta:   "Automate follow-up",
     href:  "/shop",
   },
   {
     n:    "04",
     title: "The One-Transaction Client",
     body:  "Clients who bought once and never heard from you again. Not because they left — because you never came back.",
-    cta:   "Build retention →",
+    cta:   "Build retention",
     href:  "/shop",
   },
   {
     n:    "05",
     title: "The Empty Review Page",
     body:  "Happy clients who never left a review because you never asked. Your next client is reading a blank page.",
-    cta:   "Start collecting →",
+    cta:   "Start collecting",
     href:  "/shop",
   },
   {
     n:    "06",
     title: "The Time Drain",
     body:  "Two or more hours every day on work automation handles in seconds. You are paying yourself to do a robot's job.",
-    cta:   "Get the system →",
+    cta:   "Get the system",
     href:  "/shop",
   },
 ];
@@ -177,7 +178,7 @@ export default function Problem() {
           className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-10 py-5 inline-block transition-all hover:brightness-110"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
         >
-          Take the free 2-minute audit →
+          Take the free 2-minute audit <Arr />
         </Link>
       </div>
 

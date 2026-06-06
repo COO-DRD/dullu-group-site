@@ -3,6 +3,7 @@
 import { Suspense, useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import Arr from "@/components/Arr";
 import { useAuth } from "@/context/AuthContext";
 
 function LoginForm() {
@@ -60,7 +61,7 @@ function LoginForm() {
           <p className="font-sans font-light text-sm mb-10" style={{ color: "#666666" }}>
             Don&apos;t have an account?{" "}
             <Link href="/register" className="font-medium hover:text-amber" style={{ color: "#1B3D8F" }}>
-              Join free →
+              Join free <Arr />
             </Link>
           </p>
 
@@ -120,7 +121,7 @@ function LoginForm() {
               className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase py-4 transition-all hover:brightness-110 disabled:opacity-60 cursor-pointer mt-2"
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
             >
-              {busy ? "Signing in…" : "Sign In →"}
+              {busy ? "Signing in…" : <><span>Sign In</span> <Arr /></>}
             </button>
           </form>
 

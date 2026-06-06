@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Arr from "@/components/Arr";
 import type { Product } from "@/app/shop/page";
 import type { RecProduct } from "@/app/api/shop/recs/[slug]/route";
 import { useAuth } from "@/context/AuthContext";
@@ -357,10 +358,10 @@ export default function CheckoutModal({
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
             >
               {isFree
-                ? "Download for Free →"
+                ? "Download for Free"
                 : payMethod === "paypal"
-                ? "Continue to PayPal →"
-                : `Pay KES ${product.price_kes.toLocaleString()} via M-Pesa →`}
+                ? "Continue to PayPal"
+                : `Pay KES ${product.price_kes.toLocaleString()} via M-Pesa`} <Arr />
             </button>
 
             {!isFree && payMethod === "mpesa" && (
@@ -441,7 +442,7 @@ export default function CheckoutModal({
                   className="block w-full font-sans font-bold text-[11px] tracking-[0.15em] uppercase py-4 hover:brightness-110 transition-all"
                   style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
                 >
-                  Download Now →
+                  Download Now <Arr />
                 </a>
               )}
             </div>

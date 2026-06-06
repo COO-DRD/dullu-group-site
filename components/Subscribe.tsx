@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Arr from "@/components/Arr";
 
 export default function Subscribe() {
   const [email, setEmail]   = useState("");
@@ -105,7 +106,7 @@ export default function Subscribe() {
               className="font-sans font-bold tracking-[0.2em] uppercase px-8 py-4 transition-all hover:brightness-110 disabled:opacity-60 cursor-pointer shrink-0"
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px" }}
             >
-              {busy ? "…" : "Subscribe →"}
+              {busy ? "…" : <><span>Subscribe</span> <Arr /></>}
             </button>
           </form>
         )}

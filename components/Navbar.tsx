@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import Arr from "@/components/Arr";
 
 const TYAF_LINKS = [
   { label: "YouTube",   href: "https://www.youtube.com/@Dr_Dullu" },
@@ -268,7 +269,7 @@ export default function Navbar() {
                   className="inline-block font-bold text-[11px] tracking-[0.15em] uppercase px-6 py-3 text-center"
                   style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
                 >
-                  Join Free →
+                  Join Free <Arr />
                 </Link>
               </>
             )}

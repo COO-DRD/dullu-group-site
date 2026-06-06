@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Arr from "@/components/Arr";
 import { useAuth } from "@/context/AuthContext";
 
 export default function RegisterPage() {
@@ -60,7 +61,7 @@ export default function RegisterPage() {
           <p className="font-sans font-light text-sm mb-10" style={{ color: "#666666" }}>
             Already have an account?{" "}
             <Link href="/login" className="font-medium hover:text-amber" style={{ color: "#1B3D8F" }}>
-              Sign in →
+              Sign in <Arr />
             </Link>
           </p>
 
@@ -104,7 +105,7 @@ export default function RegisterPage() {
               className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase py-4 transition-all hover:brightness-110 disabled:opacity-60 cursor-pointer mt-2"
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
             >
-              {busy ? "Creating account…" : "Create Account →"}
+              {busy ? "Creating account…" : <><span>Create Account</span> <Arr /></>}
             </button>
 
             <p className="font-sans text-[10px] text-center" style={{ color: "#AAAAAA" }}>

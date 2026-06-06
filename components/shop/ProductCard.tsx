@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Arr from "@/components/Arr";
 import type { Product } from "@/app/shop/page";
 import type { RecProduct } from "@/app/api/shop/recs/[slug]/route";
 
@@ -138,7 +139,7 @@ export default function ProductCard({
                   className="font-sans font-bold tracking-[0.2em] uppercase px-7 py-3 border transition-all hover:brightness-110 cursor-pointer"
                   style={{ borderColor: "#D4580A", color: "#D4580A", fontSize: "11px" }}
                 >
-                  {isFree ? "Get for Free →" : "Buy Now →"}
+                  {isFree ? "Get for Free" : "Buy Now"} <Arr />
                 </button>
               </div>
             </div>
@@ -253,7 +254,7 @@ export default function ProductCard({
                   className="font-sans font-bold tracking-[0.2em] uppercase px-9 py-4 transition-all hover:brightness-110 cursor-pointer"
                   style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px" }}
                 >
-                  {isFree ? "Download for Free →" : `Buy for KES ${product.price_kes.toLocaleString()} →`}
+                  {isFree ? "Download for Free" : `Buy for KES ${product.price_kes.toLocaleString()}`} <Arr />
                 </button>
               </div>
 

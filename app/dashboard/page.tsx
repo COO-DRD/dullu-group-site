@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import Arr from "@/components/Arr";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -93,7 +94,7 @@ export default function DashboardPage() {
                 className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-8 py-3 inline-block transition-all hover:brightness-110"
                 style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
               >
-                Browse the Shop →
+                Browse the Shop <Arr />
               </Link>
             </div>
           </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Arr from "@/components/Arr";
 
 const WA_NUMBER = "254790117187";
 const EMAIL     = "office@dullugroup.co.ke";
@@ -178,7 +179,7 @@ export default function OfficeOnboarding() {
                   className="font-sans font-bold text-[11px] tracking-[0.15em] uppercase px-5 py-3 transition-all hover:brightness-110"
                   style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
                 >
-                  Next →
+                  Next <Arr />
                 </button>
               </div>
             )}
@@ -227,14 +228,14 @@ export default function OfficeOnboarding() {
               className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-9 py-4 transition-all hover:brightness-110 inline-block"
               style={{ backgroundColor: "#25D366", color: "#FFFFFF" }}
             >
-              Send on WhatsApp →
+              Send on WhatsApp <Arr />
             </a>
             <a
               href={emailHref}
               className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-9 py-4 border transition-all hover:bg-black hover:text-white inline-block"
               style={{ borderColor: "#111111", color: "#111111" }}
             >
-              Send by Email →
+              Send by Email <Arr />
             </a>
           </div>
 

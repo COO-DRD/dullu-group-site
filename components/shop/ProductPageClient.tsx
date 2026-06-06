@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Arr from "@/components/Arr";
 import type { Product } from "@/app/shop/page";
 import type { RecProduct } from "@/app/api/shop/recs/[slug]/route";
 import CheckoutModal from "./CheckoutModal";
@@ -116,7 +117,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           className="font-sans font-bold tracking-[0.2em] uppercase px-10 py-5 transition-all hover:brightness-110 cursor-pointer"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 11 }}
         >
-          {isFree ? "Download for Free →" : `Get It for KES ${product.price_kes.toLocaleString()} →`}
+          {isFree ? "Download for Free" : `Get It for KES ${product.price_kes.toLocaleString()}`} <Arr />
         </button>
         {!isFree && (
           <p className="font-sans text-[10px] mt-3" style={{ color: "#BBBBBB" }}>
@@ -205,7 +206,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           className="font-sans font-bold tracking-[0.2em] uppercase px-10 py-5 transition-all hover:brightness-110 cursor-pointer"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 11 }}
         >
-          {isFree ? "Download for Free →" : `Pay KES ${product.price_kes.toLocaleString()} via M-Pesa →`}
+          {isFree ? "Download for Free" : `Pay KES ${product.price_kes.toLocaleString()} via M-Pesa`} <Arr />
         </button>
       </div>
 

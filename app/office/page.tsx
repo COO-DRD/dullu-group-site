@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import OfficeOnboarding from "@/components/OfficeOnboarding";
+import Arr from "@/components/Arr";
 
 export const metadata: Metadata = {
   title: "Book a Call — DR.DULLU",
@@ -135,7 +136,7 @@ export default function OfficePage() {
                 className="font-sans font-semibold text-[11px] tracking-[0.2em] uppercase transition-colors hover:text-amber"
                 style={{ color: "#D4580A" }}
               >
-                Browse the playbook shop →
+                Browse the playbook shop <Arr />
               </Link>
             </div>
           </div>

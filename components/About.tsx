@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Arr from "@/components/Arr";
 
 const socials = [
   { label: "YouTube",   href: "https://youtube.com/@Dr_Dullu" },
@@ -133,7 +134,7 @@ export default function About() {
                 className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
                 style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem" }}
               >
-                Book a Call →
+                Book a Call <Arr />
               </Link>
 
               {socials.map(({ label, href }) => (
@@ -203,7 +204,7 @@ export default function About() {
             className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
             style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem", marginTop: "1rem" }}
           >
-            Let&apos;s Talk →
+            Let&apos;s Talk <Arr />
           </Link>
         </div>
       </section>

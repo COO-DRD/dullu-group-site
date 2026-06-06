@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Arr from "@/components/Arr";
 
 function ease(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -137,7 +138,7 @@ export default function Hero() {
               className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-9 py-4 transition-all hover:brightness-110"
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
             >
-              Get the Playbooks →
+              Get the Playbooks <Arr />
             </Link>
             <Link
               href="/office"
