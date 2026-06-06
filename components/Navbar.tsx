@@ -4,11 +4,21 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 
+const TYAF_LINKS = [
+  { label: "YouTube",   href: "https://www.youtube.com/@Dr_Dullu" },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/drdullu/" },
+  { label: "Instagram", href: "https://www.instagram.com/dr.dullu/" },
+  { label: "Substack",  href: "https://drdullu.substack.com/" },
+  { label: "Medium",    href: "https://medium.com/@dr.dullu" },
+];
+
 export default function Navbar() {
-  const [open, setOpen]       = useState(false);
-  const [solid, setSolid]     = useState(false);
-  const { user, logout }      = useAuth();
-  const rafRef                = useRef<number>(0);
+  const [open, setOpen]         = useState(false);
+  const [tyafOpen, setTyafOpen] = useState(false);
+  const [solid, setSolid]       = useState(false);
+  const { user, logout }        = useAuth();
+  const rafRef                  = useRef<number>(0);
+  const tyafRef                 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -20,10 +30,24 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close TYAF dropdown on outside click
+  useEffect(() => {
+    function onClickOutside(e: MouseEvent) {
+      if (tyafRef.current && !tyafRef.current.contains(e.target as Node)) {
+        setTyafOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onClickOutside);
+    return () => document.removeEventListener("mousedown", onClickOutside);
+  }, []);
+
   async function handleLogout() {
     await logout();
     setOpen(false);
   }
+
+  const navLinkStyle = { color: solid ? "#1B3D8F" : "rgba(248,245,235,0.80)" };
+  const navLinkCls   = "font-sans text-sm font-medium transition-colors hover:text-amber";
 
   return (
     <nav
@@ -39,53 +63,86 @@ export default function Navbar() {
         <Link
           href="/"
           className="font-cinematic font-semibold tracking-[0.18em] uppercase transition-colors"
-          style={{
-            fontSize: "1.35rem",
-            color: solid ? "#D4580A" : "#F8F5EB",
-          }}
+          style={{ fontSize: "1.35rem", color: solid ? "#D4580A" : "#F8F5EB" }}
         >
           DR.DULLU
         </Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          {[
-            { label: "Shop",     href: "/shop" },
-            { label: "YouTube",  href: "https://youtube.com/@Dr_Dullu", ext: true },
-            { label: "4unter",   href: "https://4unter.dullugroup.co.ke", ext: true },
-          ].map(({ label, href, ext }) => (
-            ext ? (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm font-medium transition-colors hover:text-amber"
-                style={{ color: solid ? "#1B3D8F" : "rgba(248,245,235,0.80)" }}
+          <Link href="/shop" className={navLinkCls} style={navLinkStyle}>Shop</Link>
+
+          {/* TYAF dropdown */}
+          <div ref={tyafRef} className="relative">
+            <button
+              onClick={() => setTyafOpen((v) => !v)}
+              className={`${navLinkCls} flex items-center gap-1 cursor-pointer`}
+              style={navLinkStyle}
+            >
+              TYAF
+              <svg
+                width="10" height="10" viewBox="0 0 10 10" fill="none"
+                className="transition-transform duration-200"
+                style={{ transform: tyafOpen ? "rotate(180deg)" : "none", opacity: 0.6 }}
               >
-                {label}
-              </a>
-            ) : (
-              <Link
-                key={label}
-                href={href}
-                className="font-sans text-sm font-medium transition-colors hover:text-amber"
-                style={{ color: solid ? "#1B3D8F" : "rgba(248,245,235,0.80)" }}
+                <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+              </svg>
+            </button>
+
+            {tyafOpen && (
+              <div
+                className="absolute top-full right-0 mt-3 w-72"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #F0EDE8",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+                }}
               >
-                {label}
-              </Link>
-            )
-          ))}
+                {/* Header */}
+                <div className="px-5 pt-5 pb-3 border-b" style={{ borderColor: "#F0EDE8" }}>
+                  <p className="font-sans font-bold text-sm leading-snug" style={{ color: "#111" }}>
+                    The Young African Founder
+                  </p>
+                  <a
+                    href="mailto:tyaf@dullugroup.co.ke"
+                    className="font-sans text-[11px] mt-0.5 block hover:underline"
+                    style={{ color: "#D4580A" }}
+                  >
+                    tyaf@dullugroup.co.ke
+                  </a>
+                </div>
+
+                {/* Links */}
+                <div className="py-2">
+                  {TYAF_LINKS.map(({ label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setTyafOpen(false)}
+                      className="flex items-center justify-between px-5 py-2.5 transition-colors hover:bg-[#FAFAF8]"
+                    >
+                      <span className="font-sans text-sm font-medium" style={{ color: "#111" }}>{label}</span>
+                      <span className="font-sans text-[10px]" style={{ color: "#CCC" }}>↗</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <a
+            href="https://4unter.dullugroup.co.ke"
+            target="_blank" rel="noopener noreferrer"
+            className={navLinkCls} style={navLinkStyle}
+          >
+            4unter
+          </a>
 
           {user ? (
             <div className="flex items-center gap-4">
-              <Link
-                href="/dashboard"
-                className="font-sans text-sm font-medium transition-colors hover:text-amber"
-                style={{ color: solid ? "#1B3D8F" : "rgba(248,245,235,0.80)" }}
-              >
-                Dashboard
-              </Link>
+              <Link href="/dashboard" className={navLinkCls} style={navLinkStyle}>Dashboard</Link>
               <button
                 onClick={handleLogout}
                 className="font-sans font-bold text-[11px] tracking-[0.15em] uppercase px-5 py-2 border transition-all hover:brightness-110 cursor-pointer"
@@ -96,13 +153,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <Link
-                href="/login"
-                className="font-sans text-sm font-medium transition-colors hover:text-amber"
-                style={{ color: solid ? "#1B3D8F" : "rgba(248,245,235,0.80)" }}
-              >
-                Sign In
-              </Link>
+              <Link href="/login" className={navLinkCls} style={navLinkStyle}>Sign In</Link>
               <Link
                 href="/register"
                 className="font-sans font-bold text-[11px] tracking-[0.15em] uppercase px-5 py-2 transition-all hover:brightness-110"
@@ -142,58 +193,73 @@ export default function Navbar() {
       {open && (
         <div
           className="md:hidden border-t"
-          style={{
-            backgroundColor: "rgba(255,255,255,0.97)",
-            borderColor: "rgba(212,88,10,0.10)",
-          }}
+          style={{ backgroundColor: "rgba(255,255,255,0.97)", borderColor: "rgba(212,88,10,0.10)" }}
         >
           <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-5">
-            <Link
-              href="/shop"
+            <Link href="/shop" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors">
+              Shop
+            </Link>
+
+            {/* TYAF mobile section */}
+            <div>
+              <button
+                onClick={() => setTyafOpen((v) => !v)}
+                className="flex items-center gap-2 font-sans text-sm font-medium text-ink hover:text-amber transition-colors cursor-pointer w-full text-left"
+              >
+                The Young African Founder
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                  className="transition-transform duration-200"
+                  style={{ transform: tyafOpen ? "rotate(180deg)" : "none", opacity: 0.5 }}
+                >
+                  <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+                </svg>
+              </button>
+
+              {tyafOpen && (
+                <div className="mt-3 pl-3 flex flex-col gap-3 border-l-2" style={{ borderColor: "#D4580A" }}>
+                  <a
+                    href="mailto:tyaf@dullugroup.co.ke"
+                    className="font-sans text-[11px]"
+                    style={{ color: "#D4580A" }}
+                  >
+                    tyaf@dullugroup.co.ke
+                  </a>
+                  {TYAF_LINKS.map(({ label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank" rel="noopener noreferrer"
+                      onClick={() => setOpen(false)}
+                      className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
+                    >
+                      {label} ↗
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <a
+              href="https://4unter.dullugroup.co.ke"
+              target="_blank" rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
             >
-              Shop
-            </Link>
-            {[
-              { label: "YouTube", href: "https://youtube.com/@Dr_Dullu" },
-              { label: "4unter",  href: "https://4unter.dullugroup.co.ke" },
-            ].map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
-                onClick={() => setOpen(false)}
-              >
-                {label} ↗
-              </a>
-            ))}
+              4unter ↗
+            </a>
 
             {user ? (
               <>
-                <Link
-                  href="/dashboard"
-                  onClick={() => setOpen(false)}
-                  className="font-sans text-sm font-medium text-royal hover:text-amber transition-colors"
-                >
+                <Link href="/dashboard" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-royal hover:text-amber transition-colors">
                   Dashboard
                 </Link>
-                <button
-                  onClick={handleLogout}
-                  className="text-left font-sans text-sm font-medium text-muted hover:text-amber transition-colors cursor-pointer"
-                >
+                <button onClick={handleLogout} className="text-left font-sans text-sm font-medium text-muted hover:text-amber transition-colors cursor-pointer">
                   Sign Out
                 </button>
               </>
             ) : (
               <>
-                <Link
-                  href="/login"
-                  onClick={() => setOpen(false)}
-                  className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors"
-                >
+                <Link href="/login" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors">
                   Sign In
                 </Link>
                 <Link
