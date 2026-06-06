@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import OfficeOnboarding from "@/components/OfficeOnboarding";
 
 export const metadata: Metadata = {
   title: "Book a Call — DR.DULLU",
@@ -120,28 +121,10 @@ export default function OfficePage() {
               className="font-sans font-light leading-relaxed mb-10"
               style={{ color: "#666666", maxWidth: "38rem", fontSize: "1rem" }}
             >
-              Send a WhatsApp message or email with one sentence about your business and the biggest thing you want to automate. Response within 24 hours.
+              Answer four quick questions and we&apos;ll write your intro message — then send it straight to WhatsApp or email. Response within 24 hours.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              {/* Update +254XXXXXXXXX to the actual business WhatsApp number */}
-              <a
-                href="https://wa.me/254790117187?text=Hi%20Ian%2C%20I%27d%20like%20to%20book%20a%20discovery%20call."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-9 py-4 transition-all hover:brightness-110 inline-block"
-                style={{ backgroundColor: "#25D366", color: "#FFFFFF" }}
-              >
-                WhatsApp →
-              </a>
-              <a
-                href="mailto:office@dullugroup.co.ke?subject=Discovery%20Call%20Request"
-                className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-9 py-4 border transition-all hover:bg-black hover:text-white inline-block"
-                style={{ borderColor: "#111111", color: "#111111" }}
-              >
-                Email →
-              </a>
-            </div>
+            <OfficeOnboarding />
 
             <div className="mt-16 pt-10 border-t" style={{ borderColor: "#F0EDE8" }}>
               <p className="font-sans text-sm font-light mb-4" style={{ color: "#AAAAAA" }}>
