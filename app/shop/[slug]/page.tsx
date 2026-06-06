@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import ProductPageClient from "@/components/shop/ProductPageClient";
 import type { Product } from "@/app/shop/page";
 
-export const runtime = "edge";
-
 const API = "https://dullu-shop-api.dullugroup.co.ke";
 
 async function getProduct(slug: string): Promise<Product | null> {
