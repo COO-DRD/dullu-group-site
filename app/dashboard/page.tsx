@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MemberFeed from "@/components/members/MemberFeed";
+import DownloadsSection from "@/components/members/DownloadsSection";
 
 const quick = [
   { label: "Shop",         sub: "Browse playbooks",            href: "/shop",                            ext: false },
@@ -75,7 +76,7 @@ export default function DashboardPage() {
 
         <div className="max-w-6xl mx-auto px-6 py-16 space-y-20">
 
-          {/* Downloads placeholder */}
+          {/* Downloads */}
           <section>
             <p
               className="font-sans text-[10px] font-semibold tracking-[0.28em] uppercase mb-8"
@@ -83,21 +84,7 @@ export default function DashboardPage() {
             >
               Your Downloads
             </p>
-            <div
-              className="border-2 border-dashed p-12 text-center"
-              style={{ borderColor: "#F0EDE8" }}
-            >
-              <p className="font-sans font-light text-sm mb-5" style={{ color: "#888888" }}>
-                Purchases and claimed freebies appear here.
-              </p>
-              <Link
-                href="/shop"
-                className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-8 py-3 inline-block transition-all hover:brightness-110"
-                style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
-              >
-                Browse the Shop <Arr />
-              </Link>
-            </div>
+            <DownloadsSection />
           </section>
 
           {/* Member feed */}
