@@ -126,7 +126,7 @@ export default function OfficePage() {
             <div className="flex flex-wrap gap-4">
               {/* Update +254XXXXXXXXX to the actual business WhatsApp number */}
               <a
-                href="https://wa.me/254700000000?text=Hi%20Ian%2C%20I%27d%20like%20to%20book%20a%20discovery%20call."
+                href="https://wa.me/254790117187?text=Hi%20Ian%2C%20I%27d%20like%20to%20book%20a%20discovery%20call."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-9 py-4 transition-all hover:brightness-110 inline-block"
