@@ -2,7 +2,7 @@ const WA   = "254790117187";
 const SITE = "https://dullugroup.co.ke";
 const DASH = `${SITE}/dashboard`;
 
-const SHELL = (body: string) => `<!DOCTYPE html>
+const SHELL = (body: string, unsubscribeUrl?: string) => `<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/></head>
 <body style="font-family:Arial,sans-serif;background:#FAFAF8;margin:0;padding:40px 20px;">
@@ -12,7 +12,7 @@ const SHELL = (body: string) => `<!DOCTYPE html>
       Questions? Reply to this email or
       <a href="https://wa.me/${WA}" style="color:#D4580A;text-decoration:none;font-weight:600;">message me on WhatsApp</a>
       — I read every one.<br/>
-      <span style="color:#BBBBBB;">Dr. Dullu · dullugroup.co.ke</span>
+      <span style="color:#BBBBBB;">Dr. Dullu · dullugroup.co.ke</span>${unsubscribeUrl ? `<br/><a href="${unsubscribeUrl}" style="color:#CCCCCC;text-decoration:underline;font-size:11px;">Unsubscribe from digest</a>` : ""}
     </p>
   </div>
 </body>
@@ -97,11 +97,12 @@ interface DigestAnnouncement{ title: string; body: string }
 interface DigestRelease     { title: string; description: string; version?: string }
 
 export interface DigestData {
-  name:          string;
-  workshops:     DigestWorkshop[];
-  events:        DigestEvent[];
-  announcements: DigestAnnouncement[];
-  releases:      DigestRelease[];
+  name:             string;
+  unsubscribeToken: string;
+  workshops:        DigestWorkshop[];
+  events:           DigestEvent[];
+  announcements:    DigestAnnouncement[];
+  releases:         DigestRelease[];
 }
 
 function fmtDate(iso: string) {
@@ -109,8 +110,9 @@ function fmtDate(iso: string) {
 }
 
 export function weeklyDigestHtml(d: DigestData): string {
-  const first  = d.name.split(" ")[0];
-  const total  = d.workshops.length + d.events.length + d.announcements.length + d.releases.length;
+  const first        = d.name.split(" ")[0];
+  const total        = d.workshops.length + d.events.length + d.announcements.length + d.releases.length;
+  const unsubUrl     = `${SITE}/unsubscribe?token=${encodeURIComponent(d.unsubscribeToken)}`;
 
   if (total === 0) return "";
 
@@ -187,7 +189,7 @@ export function weeklyDigestHtml(d: DigestData): string {
     <div style="margin-top:28px;">
       ${CTA(DASH, "Open Dashboard")}
     </div>
-  `);
+  `, unsubUrl);
 }
 
 export function weeklyDigestSubject(count: number): string {

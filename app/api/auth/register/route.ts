@@ -16,7 +16,7 @@ async function createUser(email: string, name: string, passwordHash: string) {
       Authorization: `Bearer ${KEY}`,
       Prefer: "return=representation",
     },
-    body: JSON.stringify({ email, name, password_hash: passwordHash }),
+    body: JSON.stringify({ email, name, password_hash: passwordHash, unsubscribe_token: crypto.randomUUID() }),
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
