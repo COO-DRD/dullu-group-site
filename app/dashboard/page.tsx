@@ -7,6 +7,7 @@ import Arr from "@/components/Arr";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MemberFeed from "@/components/members/MemberFeed";
 
 const quick = [
   { label: "Shop",         sub: "Browse playbooks",            href: "/shop",                            ext: false },
@@ -97,6 +98,11 @@ export default function DashboardPage() {
                 Browse the Shop <Arr />
               </Link>
             </div>
+          </section>
+
+          {/* Member feed */}
+          <section>
+            <MemberFeed />
           </section>
 
           {/* Quick links */}
