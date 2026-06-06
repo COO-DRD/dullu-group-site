@@ -14,12 +14,16 @@ export interface Product {
   slug: string;
   title: string;
   tagline: string;
+  description?: string;
+  features?: string[];
+  what_you_get?: string[];
   category: string;
   audience: string;
   price_kes: number;
   price_usd: number;
   cover_image: string | null;
   active: number;
+  sort_order?: number;
 }
 
 async function getProducts(): Promise<Product[]> {

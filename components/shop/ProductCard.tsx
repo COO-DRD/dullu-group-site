@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import type { Product } from "@/app/shop/page";
 import type { RecProduct } from "@/app/api/shop/recs/[slug]/route";
 
@@ -117,12 +118,22 @@ export default function ProductCard({
               <p className="font-sans font-light text-lg leading-relaxed" style={{ color: "#555555", maxWidth: "42rem" }}>
                 {product.tagline}
               </p>
-              <span
-                className="font-sans font-bold tracking-[0.2em] uppercase px-7 py-3 shrink-0 border"
-                style={{ borderColor: "#D4580A", color: "#D4580A", fontSize: "11px" }}
-              >
-                {isFree ? "Get for Free →" : "Buy Now →"}
-              </span>
+              <div className="flex items-center gap-3 shrink-0">
+                <Link
+                  href={`/shop/${product.slug}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="font-sans font-semibold tracking-[0.16em] uppercase px-4 py-2 transition-colors"
+                  style={{ color: "#AAAAAA", fontSize: "10px", border: "1px solid #DDDDDD" }}
+                >
+                  Details
+                </Link>
+                <span
+                  className="font-sans font-bold tracking-[0.2em] uppercase px-7 py-3 border"
+                  style={{ borderColor: "#D4580A", color: "#D4580A", fontSize: "11px" }}
+                >
+                  {isFree ? "Get for Free →" : "Buy Now →"}
+                </span>
+              </div>
             </div>
           )}
         </div>
