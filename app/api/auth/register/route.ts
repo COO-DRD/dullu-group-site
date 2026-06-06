@@ -5,7 +5,7 @@ const SUPA = process.env.SUPABASE_URL;
 const KEY  = process.env.SUPABASE_SERVICE_KEY;
 
 async function createUser(email: string, name: string, passwordHash: string) {
-  const res = await fetch(`${SUPA}/rest/v1/site_users`, {
+  const res = await fetch(`${SUPA}/rest/v1/dr_dullu_site_users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -6,7 +6,7 @@ const KEY  = process.env.SUPABASE_SERVICE_KEY;
 
 async function findUser(email: string) {
   const res = await fetch(
-    `${SUPA}/rest/v1/site_users?email=eq.${encodeURIComponent(email)}&select=id,email,name,password_hash,onboarded&limit=1`,
+    `${SUPA}/rest/v1/dr_dullu_site_users?email=eq.${encodeURIComponent(email)}&select=id,email,name,password_hash,onboarded&limit=1`,
     { headers: { apikey: KEY!, Authorization: `Bearer ${KEY}` } }
   );
   if (!res.ok) throw new Error("DB_ERROR");

@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
   const { persona, pain_point } = await req.json();
 
-  await fetch(`${SUPA}/rest/v1/site_users?id=eq.${session.id}`, {
+  await fetch(`${SUPA}/rest/v1/dr_dullu_site_users?id=eq.${session.id}`, {
     method:  "PATCH",
     headers: {
       "Content-Type": "application/json",
