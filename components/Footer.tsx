@@ -1,60 +1,132 @@
 import Link from "next/link";
-import Image from "next/image";
+
+const products = [
+  { label: "Shop",         href: "/shop",                              ext: false },
+  { label: "Dullu Digital", href: "https://digital.dullugroup.co.ke", ext: true  },
+  { label: "4unter",       href: "https://4unter.dullugroup.co.ke",   ext: true  },
+];
+
+const connect = [
+  { label: "Book a Call", href: "/office",                          ext: false },
+  { label: "Articles",    href: "/articles",                        ext: false },
+  { label: "YouTube",     href: "https://youtube.com/@Dr_Dullu",    ext: true  },
+  { label: "Instagram",   href: "https://instagram.com/dr.dullu_",  ext: true  },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-ink-light py-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+    <footer style={{ backgroundColor: "#FFFFFF", borderTop: "1px solid #F0EDE8" }}>
+      <div className="max-w-6xl mx-auto px-6 pt-16 pb-10">
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-14">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <Image src="/logo-mark.svg" alt="DR.DULLU mark" width={28} height={28} />
-              <span className="font-semibold text-sm tracking-[0.15em] text-gold uppercase">DR. DULLU</span>
-            </div>
-            <p className="font-extralight text-sm text-grey leading-relaxed max-w-xs">
+            <span
+              className="font-cinematic font-semibold tracking-[0.18em] uppercase block mb-3"
+              style={{ fontSize: "1.6rem", color: "#D4580A" }}
+            >
+              DR.DULLU
+            </span>
+            <p className="font-sans font-light text-sm leading-relaxed" style={{ color: "#666666", maxWidth: 260 }}>
               Knowledge. Audacity. Empire.
+              <br />
+              Built in public from Kilifi, Kenya.
             </p>
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-5">Products</p>
+            <p
+              className="font-sans text-[10px] font-semibold tracking-[0.22em] uppercase mb-5"
+              style={{ color: "#D4580A" }}
+            >
+              Products
+            </p>
             <div className="flex flex-col gap-3">
-              <Link href="/shop" className="text-sm font-light text-grey hover:text-gold transition-colors">
-                Shop
-              </Link>
-              <a href="https://digital.dullugroup.co.ke" className="text-sm font-light text-grey hover:text-gold transition-colors">
-                Dullu Digital
-              </a>
-              <a href="https://4unter.dullugroup.co.ke" className="text-sm font-light text-grey hover:text-gold transition-colors">
-                4unter
-              </a>
+              {products.map(({ label, href, ext }) =>
+                ext ? (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans font-light text-sm transition-colors hover:text-amber"
+                    style={{ color: "#666666" }}
+                  >
+                    {label}
+                  </a>
+                ) : (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="font-sans font-light text-sm transition-colors hover:text-amber"
+                    style={{ color: "#666666" }}
+                  >
+                    {label}
+                  </Link>
+                )
+              )}
             </div>
           </div>
 
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-5">Connect</p>
+            <p
+              className="font-sans text-[10px] font-semibold tracking-[0.22em] uppercase mb-5"
+              style={{ color: "#D4580A" }}
+            >
+              Connect
+            </p>
             <div className="flex flex-col gap-3">
-              <Link href="/office" className="text-sm font-light text-grey hover:text-gold transition-colors">
-                Book a Call
-              </Link>
-              <Link href="/articles" className="text-sm font-light text-grey hover:text-gold transition-colors">
-                Articles
-              </Link>
-              <a href="https://youtube.com/@Dr_Dullu" target="_blank" rel="noopener noreferrer" className="text-sm font-light text-grey hover:text-gold transition-colors">
-                YouTube
-              </a>
+              {connect.map(({ label, href, ext }) =>
+                ext ? (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-sans font-light text-sm transition-colors hover:text-amber"
+                    style={{ color: "#666666" }}
+                  >
+                    {label} ↗
+                  </a>
+                ) : (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="font-sans font-light text-sm transition-colors hover:text-amber"
+                    style={{ color: "#666666" }}
+                  >
+                    {label}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gold/10 pt-8 flex flex-col md:flex-row justify-between gap-4">
-          <p className="text-xs font-light text-grey/50">© 2026 DR.DULLU · KILIFI, KENYA</p>
+        <div
+          className="flex flex-col md:flex-row justify-between gap-4 pt-8"
+          style={{ borderTop: "1px solid #F0EDE8" }}
+        >
+          <p className="font-sans text-xs font-light" style={{ color: "#AAAAAA" }}>
+            © 2026 DR.DULLU · KILIFI, KENYA
+          </p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="text-xs font-light text-grey/50 hover:text-gold transition-colors">Privacy</Link>
-            <Link href="/terms" className="text-xs font-light text-grey/50 hover:text-gold transition-colors">Terms</Link>
-            <Link href="/contact" className="text-xs font-light text-grey/50 hover:text-gold transition-colors">Contact</Link>
+            {[
+              { label: "Privacy", href: "/privacy" },
+              { label: "Terms",   href: "/terms"   },
+              { label: "Contact", href: "/contact"  },
+            ].map(({ label, href }) => (
+              <Link
+                key={label}
+                href={href}
+                className="font-sans text-xs font-light transition-colors hover:text-amber"
+                style={{ color: "#AAAAAA" }}
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
+
       </div>
     </footer>
   );

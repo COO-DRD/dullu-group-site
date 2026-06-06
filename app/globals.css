@@ -1,24 +1,75 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold:      #C9A02C;
-  --color-gold-dim:  rgba(201, 160, 44, 0.12);
-  --color-offwhite:  #F5F5F0;
-  --color-grey:      #6B6B6B;
-  --color-ink:       #0A0A0A;
-  --color-ink-light: #141414;
+  --color-amber:      #D4580A;
+  --color-amber-dim:  rgba(212, 88, 10, 0.10);
+  --color-royal:      #1B3D8F;
+  --color-royal-dim:  rgba(27, 61, 143, 0.08);
+  --color-egg:        #F8F5EB;
+  --color-ink:        #111111;
+  --color-muted:      #666666;
+  --color-warm:       #F0EDE8;
 
-  --font-sans: var(--font-montserrat, "Montserrat", sans-serif);
+  --font-sans:        var(--font-montserrat, "Montserrat", sans-serif);
+  --font-cinematic:   var(--font-cormorant, "Cormorant Garamond", serif);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background-color: #0A0A0A;
-  color: #F5F5F0;
+  background-color: #FFFFFF;
+  color: #111111;
   font-family: var(--font-montserrat, "Montserrat", sans-serif);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Photo entrance — plays once on load */
+@keyframes photo-breathe {
+  from { opacity: 0; transform: scale(1.06) translateY(-8px); }
+  to   { opacity: 1; transform: scale(1.03) translateY(0px); }
+}
+
+/* Pocket text entrance */
+@keyframes pocket-appear {
+  from { opacity: 0; letter-spacing: 0.05em; }
+  to   { opacity: 1; letter-spacing: 0.18em; }
+}
+
+/* CTA slide up */
+@keyframes cta-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll-reveal for below-the-fold sections */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered grid children */
+.reveal-grid > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-grid.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.04s; }
+.reveal-grid.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.13s; }
+.reveal-grid.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.22s; }
+.reveal-grid.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.31s; }
+.reveal-grid.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.40s; }
+.reveal-grid.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.49s; }
+
+/* Input focus */
+input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #D4580A;
+  outline-offset: 0;
 }

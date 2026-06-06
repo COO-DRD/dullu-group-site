@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -7,6 +8,14 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   display: "swap",
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -38,8 +47,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={montserrat.variable}>
-      <body>{children}</body>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://dullu-shop-api.dullugroup.co.ke" />
+        <link rel="dns-prefetch" href="https://dullu-shop-api.dullugroup.co.ke" />
+      </head>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
