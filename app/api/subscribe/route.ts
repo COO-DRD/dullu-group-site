@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { sendEmail } from "@/lib/email";
+import { subscriberWelcomeHtml, subscriberWelcomeSubject } from "@/lib/email-templates";
 
 const SUPA_URL = process.env.SUPABASE_URL!;
 const SUPA_KEY = process.env.SUPABASE_SERVICE_KEY!;
@@ -24,15 +26,30 @@ export async function POST(req: NextRequest) {
         "Prefer":        "return=minimal,resolution=ignore-duplicates",
       },
       body: JSON.stringify({
-        email: email.trim().toLowerCase(),
-        name:  name?.trim() ?? null,
+        email:  email.trim().toLowerCase(),
+        name:   name?.trim() ?? null,
         source: source ?? "homepage",
       }),
     });
 
-    // 409 = duplicate (already subscribed) — treat as success
-    if (!res.ok && res.status !== 409) {
+    const isNew = res.status !== 409;
+
+    if (!res.ok && isNew) {
       return NextResponse.json({ error: "Could not subscribe. Try again." }, { status: 500 });
+    }
+
+    // Only send welcome to new subscribers, not duplicates
+    if (isNew) {
+      try {
+        await sendEmail({
+          to:      email.trim().toLowerCase(),
+          subject: subscriberWelcomeSubject,
+          html:    subscriberWelcomeHtml(),
+        });
+      } catch (emailErr) {
+        console.error("[subscribe] welcome email failed:", emailErr);
+        // Don't fail the subscribe — DB write succeeded
+      }
     }
 
     return NextResponse.json({ ok: true });

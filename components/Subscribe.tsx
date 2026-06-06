@@ -52,22 +52,23 @@ export default function Subscribe() {
           className="font-sans font-semibold uppercase tracking-[0.28em] mb-5"
           style={{ fontSize: "10px", color: "#D4580A" }}
         >
-          Stay in the loop
+          Subscriber drops
         </p>
 
         <h2
           className="font-sans font-black uppercase tracking-tight leading-[1.0] mb-6"
           style={{ fontSize: "clamp(2.6rem,6vw,6rem)", color: "#F8F5EB", maxWidth: "20ch" }}
         >
-          In your inbox before everyone else.
+          The real stuff. Subscribers only.
         </h2>
 
         <p
           className="font-sans font-light leading-relaxed mb-12"
           style={{ color: "rgba(248,245,235,0.55)", maxWidth: "36rem", fontSize: "1.05rem" }}
         >
-          One email when something ships — systems, tools, real numbers.
-          No noise. Unsubscribe any time.
+          Automation walkthroughs, raw case studies from Kenyan businesses,
+          and short insights that don&apos;t get posted anywhere else.
+          No AI fluff. No noise. Unsubscribe any time.
         </p>
 
         {done ? (
@@ -78,9 +79,14 @@ export default function Subscribe() {
             >
               <span className="font-black text-sm -rotate-45" style={{ color: "#FFFFFF" }}>✓</span>
             </div>
-            <p className="font-sans font-medium" style={{ color: "#F8F5EB" }}>
-              You&apos;re in. Watch your inbox.
-            </p>
+            <div>
+              <p className="font-sans font-medium" style={{ color: "#F8F5EB" }}>
+                You&apos;re in. Check your inbox — first drop is on its way.
+              </p>
+              <p className="font-sans text-xs mt-1" style={{ color: "rgba(248,245,235,0.45)" }}>
+                While you wait, grab one of the 6 free resources in the shop.
+              </p>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-0 max-w-xl">

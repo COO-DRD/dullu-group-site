@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createSessionCookie, hashPassword } from "@/lib/auth";
+import { sendEmail } from "@/lib/email";
+import { registrationWelcomeHtml, registrationWelcomeSubject } from "@/lib/email-templates";
 
 const SUPA = process.env.SUPABASE_URL;
 const KEY  = process.env.SUPABASE_SERVICE_KEY;
@@ -41,6 +43,13 @@ export async function POST(req: NextRequest) {
     const user = await createUser(email.toLowerCase().trim(), name.trim(), passwordHash);
 
     await createSessionCookie({ id: user.id, email: user.email, name: user.name, onboarded: false });
+
+    // Fire-and-forget welcome email — don't block the response
+    sendEmail({
+      to:      user.email,
+      subject: registrationWelcomeSubject,
+      html:    registrationWelcomeHtml(user.name),
+    }).catch((err) => console.error("[register] welcome email failed:", err));
 
     return NextResponse.json({ ok: true, user: { id: user.id, name: user.name, email: user.email, onboarded: false } });
   } catch (err: unknown) {
