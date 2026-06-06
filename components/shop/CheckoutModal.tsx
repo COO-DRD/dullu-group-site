@@ -59,6 +59,40 @@ export default function CheckoutModal({
     return () => window.removeEventListener("keydown", fn);
   }, [onClose]);
 
+  // Auto-submit free items for logged-in users — no form needed
+  useEffect(() => {
+    if (!isFree || !user || step !== "form") return;
+    setStep("processing");
+    fetch(`${API}/api/checkout`, {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify({
+        productSlug:   product.slug,
+        email:         user.email,
+        name:          user.name,
+        paymentMethod: "free",
+      }),
+    })
+      .then((r) => r.json())
+      .then((data: { error?: string; downloadUrl?: string; alreadyOwned?: boolean }) => {
+        if (data.downloadUrl) {
+          setDownloadUrl(data.downloadUrl);
+          recordPurchase(user.email);
+          setStep("success");
+        } else {
+          setErrorMsg(data.alreadyOwned
+            ? "You already own this — check your email for the link."
+            : (data.error ?? "Checkout failed."));
+          setStep("error");
+        }
+      })
+      .catch(() => {
+        setErrorMsg("Network error. Check your connection and try again.");
+        setStep("error");
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Load PayPal SDK and render button when on paypal step
   useEffect(() => {
     if (step !== "paypal" || ppRendered.current) return;
@@ -252,7 +286,22 @@ export default function CheckoutModal({
         {/* ── Form ─────────────────────────────────────────────── */}
         {step === "form" && (
           <form onSubmit={handleSubmit} className="space-y-4">
-            {[
+
+            {/* Logged-in identity strip */}
+            {user && (
+              <div
+                className="flex items-center gap-3 px-4 py-3 mb-2"
+                style={{ backgroundColor: "#F8F5EB", borderLeft: "3px solid #D4580A" }}
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="font-sans font-semibold text-xs truncate" style={{ color: "#111111" }}>{user.name}</p>
+                  <p className="font-sans text-[10px] truncate" style={{ color: "#888888" }}>{user.email}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Name + email only for guests */}
+            {!user && [
               { label: "Full Name",     type: "text",  val: name,  set: setName,  placeholder: "Jane Wanjiru" },
               { label: "Email Address", type: "email", val: email, set: setEmail, placeholder: "jane@example.com" },
             ].map(({ label, type, val, set, placeholder }) => (
@@ -288,7 +337,6 @@ export default function CheckoutModal({
 
             {!isFree && (
               <>
-                {/* Payment method tabs */}
                 <div>
                   <label className="block font-sans text-[10px] font-semibold tracking-[0.14em] uppercase mb-2" style={{ color: "#888888" }}>
                     Payment Method
@@ -348,7 +396,7 @@ export default function CheckoutModal({
 
             {!user && (
               <p className="font-sans text-[10px]" style={{ color: "#AAAAAA" }}>
-                <Link href="/register" style={{ color: "#D4580A" }}>Join free</Link> to save this to your dashboard.
+                <Link href="/register" style={{ color: "#D4580A" }}>Join free</Link> to skip this form next time.
               </p>
             )}
 
