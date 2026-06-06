@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const session = await getSession();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { persona, pain_point } = await req.json();
+  const { persona, pain_point, phone } = await req.json();
 
   await fetch(`${SUPA}/rest/v1/dr_dullu_site_users?id=eq.${session.id}`, {
     method:  "PATCH",
@@ -17,7 +17,12 @@ export async function POST(req: NextRequest) {
       apikey:         KEY!,
       Authorization:  `Bearer ${KEY}`,
     },
-    body: JSON.stringify({ persona, pain_point, onboarded: true }),
+    body: JSON.stringify({
+      persona,
+      pain_point,
+      onboarded: true,
+      ...(phone ? { phone: phone.trim() } : {}),
+    }),
   });
 
   await createSessionCookie({ ...session, onboarded: true });

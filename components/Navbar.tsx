@@ -17,6 +17,7 @@ export default function Navbar() {
   const [open, setOpen]         = useState(false);
   const [tyafOpen, setTyafOpen] = useState(false);
   const [solid, setSolid]       = useState(false);
+  const [hasNew, setHasNew]     = useState(false);
   const { user, logout }        = useAuth();
   const rafRef                  = useRef<number>(0);
   const tyafRef                 = useRef<HTMLDivElement>(null);
@@ -30,6 +31,14 @@ export default function Navbar() {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    fetch("/api/members/has-new")
+      .then((r) => r.json())
+      .then((d: { hasNew: boolean }) => setHasNew(d.hasNew))
+      .catch(() => {});
+  }, [user]);
 
   // Close TYAF dropdown on outside click
   useEffect(() => {
@@ -143,7 +152,15 @@ export default function Navbar() {
 
           {user ? (
             <div className="flex items-center gap-4">
-              <Link href="/dashboard" className={navLinkCls} style={navLinkStyle}>Dashboard</Link>
+              <Link href="/dashboard" className={`${navLinkCls} relative`} style={navLinkStyle}>
+                Dashboard
+                {hasNew && (
+                  <span
+                    className="absolute -top-1 -right-2 w-2 h-2 rounded-full"
+                    style={{ backgroundColor: "#D4580A" }}
+                  />
+                )}
+              </Link>
               <button
                 onClick={handleLogout}
                 className="font-sans font-bold text-[11px] tracking-[0.15em] uppercase px-5 py-2 border transition-all hover:brightness-110 cursor-pointer"
@@ -251,8 +268,11 @@ export default function Navbar() {
 
             {user ? (
               <>
-                <Link href="/dashboard" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-royal hover:text-amber transition-colors">
+                <Link href="/dashboard" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-royal hover:text-amber transition-colors relative inline-flex items-center gap-2">
                   Dashboard
+                  {hasNew && (
+                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: "#D4580A" }} />
+                  )}
                 </Link>
                 <button onClick={handleLogout} className="text-left font-sans text-sm font-medium text-muted hover:text-amber transition-colors cursor-pointer">
                   Sign Out

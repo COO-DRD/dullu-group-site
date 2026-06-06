@@ -27,6 +27,11 @@ export default function DashboardPage() {
   }, [user, loading, router]);
 
   useEffect(() => {
+    if (!user) return;
+    fetch("/api/auth/seen", { method: "PATCH" }).catch(() => {});
+  }, [user]);
+
+  useEffect(() => {
     const el = headerRef.current;
     if (!el) return;
     setTimeout(() => el.classList.add("visible"), 80);
