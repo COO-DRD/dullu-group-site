@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Arr from "@/components/Arr";
 
 export interface Event {
@@ -20,19 +23,69 @@ function fmt(iso: string) {
   };
 }
 
+function RegisterButton({
+  event, registered, onRegister,
+}: {
+  event: Event;
+  registered: boolean;
+  onRegister: (id: string) => void;
+}) {
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(registered);
+  const [err,  setErr]  = useState(false);
+
+  async function handleClick() {
+    if (done || busy) return;
+    setBusy(true); setErr(false);
+    try {
+      const res = await fetch("/api/members/register", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contentType:     "event",
+          contentId:       event.id,
+          contentTitle:    event.title,
+          startsAt:        event.starts_at,
+          location:        event.location,
+          registrationUrl: event.registration_url,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setDone(true);
+      onRegister(event.id);
+      if (event.registration_url) window.open(event.registration_url, "_blank");
+    } catch {
+      setErr(true);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (done) return (
+    <span className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase" style={{ color: "#22c55e" }}>
+      Registered ✓
+    </span>
+  );
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={busy}
+      className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1 disabled:opacity-50 cursor-pointer"
+      style={{ color: "#D4580A" }}
+    >
+      {busy ? "…" : err ? "Try again" : <><span>Register</span> <Arr /></>}
+    </button>
+  );
+}
+
 const TEMPLATES = [
   // 0 — date box left
-  ({ e }: { e: Event }) => {
+  ({ e, registered, onRegister }: { e: Event; registered: boolean; onRegister: (id: string) => void }) => {
     const d = fmt(e.starts_at);
     return (
-      <div
-        className="flex gap-0 transition-transform hover:-translate-y-0.5"
-        style={{ backgroundColor: "#FFFFFF", border: "1px solid #F0EDE8" }}
-      >
-        <div
-          className="flex flex-col items-center justify-center px-5 py-6 shrink-0"
-          style={{ backgroundColor: "#D4580A", minWidth: "72px" }}
-        >
+      <div className="flex gap-0 transition-transform hover:-translate-y-0.5" style={{ backgroundColor: "#FFFFFF", border: "1px solid #F0EDE8" }}>
+        <div className="flex flex-col items-center justify-center px-5 py-6 shrink-0" style={{ backgroundColor: "#D4580A", minWidth: "72px" }}>
           <span className="font-sans font-black text-2xl leading-none" style={{ color: "#FFFFFF" }}>{d.day}</span>
           <span className="font-sans font-semibold text-[9px] tracking-[0.2em] mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }}>{d.month}</span>
         </div>
@@ -42,30 +95,18 @@ const TEMPLATES = [
           </p>
           <h3 className="font-sans font-black text-sm leading-snug mb-2" style={{ color: "#111111" }}>{e.title}</h3>
           <p className="font-sans font-light text-xs leading-relaxed mb-3" style={{ color: "#777777" }}>{e.description}</p>
-          {e.registration_url && (
-            <a href={e.registration_url} target="_blank" rel="noopener noreferrer"
-              className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
-              style={{ color: "#D4580A" }}>
-              Register <Arr />
-            </a>
-          )}
+          <RegisterButton event={e} registered={registered} onRegister={onRegister} />
         </div>
       </div>
     );
   },
 
-  // 1 — big year background ghost
-  ({ e }: { e: Event }) => {
+  // 1 — big ghost date background
+  ({ e, registered, onRegister }: { e: Event; registered: boolean; onRegister: (id: string) => void }) => {
     const d = fmt(e.starts_at);
     return (
-      <div
-        className="relative p-6 overflow-hidden transition-transform hover:-translate-y-0.5"
-        style={{ backgroundColor: "#111111" }}
-      >
-        <span
-          className="absolute right-3 bottom-0 font-sans font-black leading-none select-none pointer-events-none"
-          style={{ fontSize: "6rem", color: "rgba(255,255,255,0.04)" }}
-        >
+      <div className="relative p-6 overflow-hidden transition-transform hover:-translate-y-0.5" style={{ backgroundColor: "#111111" }}>
+        <span className="absolute right-3 bottom-0 font-sans font-black leading-none select-none pointer-events-none" style={{ fontSize: "6rem", color: "rgba(255,255,255,0.04)" }}>
           {d.day}
         </span>
         <p className="font-sans text-[9px] font-semibold tracking-[0.2em] uppercase mb-3" style={{ color: "#D4580A" }}>
@@ -73,19 +114,13 @@ const TEMPLATES = [
         </p>
         <h3 className="font-sans font-black text-sm leading-snug mb-2" style={{ color: "#F8F5EB" }}>{e.title}</h3>
         <p className="font-sans font-light text-xs leading-relaxed mb-4" style={{ color: "rgba(248,245,235,0.5)" }}>{e.description}</p>
-        {e.registration_url && (
-          <a href={e.registration_url} target="_blank" rel="noopener noreferrer"
-            className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
-            style={{ color: "#D4580A" }}>
-            Register <Arr />
-          </a>
-        )}
+        <RegisterButton event={e} registered={registered} onRegister={onRegister} />
       </div>
     );
   },
 
   // 2 — minimal dot timeline row
-  ({ e }: { e: Event }) => {
+  ({ e, registered, onRegister }: { e: Event; registered: boolean; onRegister: (id: string) => void }) => {
     const d = fmt(e.starts_at);
     return (
       <div className="flex gap-5 py-5 border-b transition-colors hover:bg-orange-50/20" style={{ borderColor: "#F0EDE8" }}>
@@ -99,20 +134,21 @@ const TEMPLATES = [
           </p>
           <h3 className="font-sans font-bold text-sm mb-1" style={{ color: "#111111" }}>{e.title}</h3>
           <p className="font-sans font-light text-xs leading-relaxed mb-3" style={{ color: "#777777" }}>{e.description}</p>
-          {e.registration_url && (
-            <a href={e.registration_url} target="_blank" rel="noopener noreferrer"
-              className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
-              style={{ color: "#D4580A" }}>
-              Register <Arr />
-            </a>
-          )}
+          <RegisterButton event={e} registered={registered} onRegister={onRegister} />
         </div>
       </div>
     );
   },
 ];
 
-export default function EventCard({ event, index }: { event: Event; index: number }) {
+export default function EventCard({
+  event, index, registered, onRegister,
+}: {
+  event: Event;
+  index: number;
+  registered: boolean;
+  onRegister: (id: string) => void;
+}) {
   const Template = TEMPLATES[index % 3];
-  return <Template e={event} />;
+  return <Template e={event} registered={registered} onRegister={onRegister} />;
 }

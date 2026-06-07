@@ -35,16 +35,26 @@ function Empty({ label }: { label: string }) {
 }
 
 export default function MemberFeed() {
-  const [feed, setFeed]       = useState<Feed | null>(null);
-  const [error, setError]     = useState(false);
-  const [tab, setTab]         = useState<"all" | "workshops" | "events" | "releases">("all");
+  const [feed, setFeed]           = useState<Feed | null>(null);
+  const [registeredIds, setIds]   = useState<Set<string>>(new Set());
+  const [error, setError]         = useState(false);
+  const [tab, setTab]             = useState<"all" | "workshops" | "events" | "releases">("all");
 
   useEffect(() => {
-    fetch("/api/members/feed")
-      .then((r) => r.ok ? r.json() : Promise.reject())
-      .then(setFeed)
+    Promise.all([
+      fetch("/api/members/feed").then((r) => r.ok ? r.json() : Promise.reject()),
+      fetch("/api/members/registrations").then((r) => r.ok ? r.json() : { ids: [] }),
+    ])
+      .then(([feedData, regData]: [Feed, { ids: string[] }]) => {
+        setFeed(feedData);
+        setIds(new Set(regData.ids));
+      })
       .catch(() => setError(true));
   }, []);
+
+  function onRegister(id: string) {
+    setIds((prev) => new Set([...prev, id]));
+  }
 
   if (error) return (
     <p className="font-sans text-sm" style={{ color: "#D4580A" }}>Failed to load member content.</p>
@@ -104,7 +114,7 @@ export default function MemberFeed() {
           {feed.workshops.length === 0 ? <Empty label="workshops" /> : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {feed.workshops.map((w, i) => (
-                <WorkshopCard key={w.id} workshop={w} index={i} />
+                <WorkshopCard key={w.id} workshop={w} index={i} registered={registeredIds.has(w.id)} onRegister={onRegister} />
               ))}
             </div>
           )}
@@ -118,7 +128,7 @@ export default function MemberFeed() {
           {feed.events.length === 0 ? <Empty label="events" /> : (
             <div className="space-y-0">
               {feed.events.map((e, i) => (
-                <EventCard key={e.id} event={e} index={i} />
+                <EventCard key={e.id} event={e} index={i} registered={registeredIds.has(e.id)} onRegister={onRegister} />
               ))}
             </div>
           )}
