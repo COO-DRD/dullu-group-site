@@ -196,7 +196,7 @@ export default function ContentAdminPage() {
           {tab === "releases" && <>
             <div className="flex flex-col gap-1">
               <label className="font-sans text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: "#888" }}>Type</label>
-              <select value={r.type} onChange={(e) => setEditing({ ...editing, type: e.target.value })}
+              <select value={r.type} onChange={(e) => setEditing({ ...editing, type: e.target.value as Release["type"] })}
                 className="font-sans text-sm px-3 py-2 focus:outline-none"
                 style={{ backgroundColor: "#F9F9F9", border: "1px solid #E0E0E0", color: "#111" }}>
                 <option value="video">Video</option>
