@@ -61,15 +61,24 @@ const s = (label: string, val: string | null, set: (v: string) => void, type: "t
   </div>
 );
 
+interface Registration {
+  id: string;
+  registeredAt: string;
+  name: string;
+  email: string;
+  phone: string | null;
+}
+
 export default function ContentAdminPage() {
-  const [secret, setSecret]   = useState("");
-  const [authed, setAuthed]   = useState(false);
-  const [tab, setTab]         = useState<ContentType>("workshops");
-  const [rows, setRows]       = useState<Row[]>([]);
-  const [editing, setEditing] = useState<Row | null>(null);
-  const [isNew, setIsNew]     = useState(false);
-  const [busy, setBusy]       = useState(false);
-  const [msg, setMsg]         = useState("");
+  const [secret, setSecret]         = useState("");
+  const [authed, setAuthed]         = useState(false);
+  const [tab, setTab]               = useState<ContentType>("workshops");
+  const [rows, setRows]             = useState<Row[]>([]);
+  const [editing, setEditing]       = useState<Row | null>(null);
+  const [isNew, setIsNew]           = useState(false);
+  const [busy, setBusy]             = useState(false);
+  const [msg, setMsg]               = useState("");
+  const [viewing, setViewing]       = useState<{ row: Row; regs: Registration[] | null } | null>(null);
 
   useEffect(() => {
     const s = sessionStorage.getItem("content_admin_secret");
@@ -122,6 +131,83 @@ export default function ContentAdminPage() {
     if (!confirm(`Delete "${(row as Workshop).title}"?`)) return;
     await fetch(`/api/admin/content?type=${tab}&id=${row.id}`, { method: "DELETE", headers: { "x-admin-secret": secret } });
     await load(secret, tab);
+  }
+
+  async function openRegistrations(row: Row) {
+    setViewing({ row, regs: null });
+    const res = await fetch(`/api/admin/registrations?contentId=${row.id}`, { headers: { "x-admin-secret": secret } });
+    const data = await res.json() as { registrations: Registration[] };
+    setViewing({ row, regs: data.registrations });
+  }
+
+  // ── Registrations view ───────────────────────────────────────────────────────
+  if (viewing) {
+    const { row, regs } = viewing;
+    const r = row as Workshop & Event;
+    const fmt = (iso: string) => new Date(iso).toLocaleString("en-KE", {
+      day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit",
+    });
+    return (
+      <div style={{ minHeight: "100vh", backgroundColor: "#FFFFFF" }}>
+        <div style={{ backgroundColor: "#111111", padding: "1rem 2rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <p className="font-sans text-[9px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: "#666" }}>{tab.slice(0, -1)}</p>
+            <span className="font-cinematic tracking-[0.18em] uppercase" style={{ color: "#D4580A", fontSize: "1.1rem" }}>
+              {r.title}
+            </span>
+          </div>
+          <button onClick={() => setViewing(null)} className="font-sans text-xs cursor-pointer" style={{ color: "#888" }}>← Back</button>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 py-10">
+          <div className="flex items-center justify-between mb-6">
+            <p className="font-sans text-[10px] font-semibold tracking-[0.22em] uppercase" style={{ color: "#D4580A" }}>
+              Registrations {regs ? `(${regs.length})` : ""}
+            </p>
+            <button
+              onClick={() => openRegistrations(row)}
+              className="font-sans text-[10px] font-semibold tracking-[0.14em] uppercase px-3 py-1.5 cursor-pointer hover:brightness-90"
+              style={{ backgroundColor: "#F0EDE8", color: "#555" }}
+            >
+              Refresh
+            </button>
+          </div>
+
+          {regs === null ? (
+            <div className="flex items-center gap-2 py-12">
+              <div className="w-4 h-4 border-2 rounded-full animate-spin" style={{ borderColor: "#F0EDE8", borderTopColor: "#D4580A" }} />
+              <span className="font-sans text-xs" style={{ color: "#BBBBBB" }}>Loading…</span>
+            </div>
+          ) : regs.length === 0 ? (
+            <p className="font-sans text-sm py-12 text-center" style={{ color: "#AAAAAA" }}>No registrations yet.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full" style={{ borderCollapse: "collapse" }}>
+                <thead>
+                  <tr style={{ borderBottom: "2px solid #F0EDE8", backgroundColor: "#FAFAF8" }}>
+                    {["Name", "Email", "Phone", "Registered"].map((h) => (
+                      <th key={h} className="font-sans font-semibold text-[10px] tracking-[0.18em] uppercase text-left px-4 py-3" style={{ color: "#888" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {regs.map((reg) => (
+                    <tr key={reg.id} style={{ borderBottom: "1px solid #F0EDE8" }}>
+                      <td className="px-4 py-3 font-sans font-semibold text-sm" style={{ color: "#111" }}>{reg.name}</td>
+                      <td className="px-4 py-3 font-sans text-sm">
+                        <a href={`mailto:${reg.email}`} style={{ color: "#D4580A" }}>{reg.email}</a>
+                      </td>
+                      <td className="px-4 py-3 font-sans text-sm" style={{ color: "#555" }}>{reg.phone ?? "—"}</td>
+                      <td className="px-4 py-3 font-sans text-xs" style={{ color: "#888" }}>{fmt(reg.registeredAt)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    );
   }
 
   // ── Login ────────────────────────────────────────────────────────────────────
@@ -304,6 +390,14 @@ export default function ContentAdminPage() {
                 </p>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
+                {(tab === "workshops" || tab === "events") && (
+                  <button
+                    onClick={() => openRegistrations(row)}
+                    className="font-sans font-semibold text-[10px] tracking-[0.14em] uppercase px-3 py-1.5 cursor-pointer hover:brightness-90"
+                    style={{ backgroundColor: "#111111", color: "#D4580A" }}>
+                    Registrations
+                  </button>
+                )}
                 <button
                   onClick={() => togglePublish(row)}
                   className="font-sans text-[10px] font-semibold tracking-[0.12em] uppercase px-3 py-1.5 cursor-pointer transition-all"
