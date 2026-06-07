@@ -129,9 +129,13 @@ export default function OnboardingPage() {
               >
                 Get notified on WhatsApp?
               </h1>
-              <p className="font-sans font-light text-sm mb-10" style={{ color: "#666666", maxWidth: "32rem" }}>
-                When a new workshop drops or an event goes live, I'll ping you on WhatsApp.
+              <p className="font-sans font-light text-sm mb-6" style={{ color: "#666666", maxWidth: "32rem" }}>
+                When a new workshop drops or an event goes live, I&apos;ll ping you on WhatsApp.
                 No spam — only new content notifications.
+              </p>
+              <p className="font-sans text-[10px] mb-8 leading-relaxed" style={{ color: "#AAAAAA", maxWidth: "28rem" }}>
+                By providing your number you consent to receive WhatsApp notifications from DR.DULLU.
+                Reply STOP at any time to opt out.
               </p>
               <div className="space-y-4 max-w-sm">
                 <div>

@@ -43,6 +43,7 @@ export default function CheckoutModal({
   const [email, setEmail]             = useState(user?.email ?? "");
   const [phone, setPhone]             = useState("");
   const [whatsapp, setWhatsapp]       = useState("");
+  const [marketing, setMarketing]     = useState(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [errorMsg, setErrorMsg]       = useState("");
   const [recs, setRecs]               = useState<RecProduct[]>([]);
@@ -108,10 +109,11 @@ export default function CheckoutModal({
             method:  "POST",
             headers: { "Content-Type": "application/json" },
             body:    JSON.stringify({
-              productSlug:   product.slug,
-              email:         email.trim(),
-              name:          name.trim(),
-              paymentMethod: "paypal",
+              productSlug:      product.slug,
+              email:            email.trim(),
+              name:             name.trim(),
+              paymentMethod:    "paypal",
+              marketingConsent: marketing,
               ...(whatsapp.trim() ? { phone: whatsapp.trim() } : {}),
             }),
           });
@@ -204,11 +206,12 @@ export default function CheckoutModal({
     setStep("processing");
     setErrorMsg("");
     try {
-      const body: Record<string, string> = {
-        productSlug:   product.slug,
-        email:         email.trim(),
-        name:          name.trim(),
-        paymentMethod: isFree ? "free" : "mpesa",
+      const body: Record<string, string | boolean> = {
+        productSlug:      product.slug,
+        email:            email.trim(),
+        name:             name.trim(),
+        paymentMethod:    isFree ? "free" : "mpesa",
+        marketingConsent: marketing,
       };
       if (!isFree) body.phone = phone.trim();
       if (isFree && whatsapp.trim()) body.phone = whatsapp.trim();
@@ -409,13 +412,25 @@ export default function CheckoutModal({
               </p>
             )}
 
-            <p className="font-sans text-[10px] leading-relaxed pt-2" style={{ color: "#CCCCCC" }}>
+            {/* Marketing consent — unticked by default */}
+            <label className="flex items-start gap-3 cursor-pointer pt-1">
+              <input
+                type="checkbox"
+                checked={marketing}
+                onChange={(e) => setMarketing(e.target.checked)}
+                className="mt-0.5 shrink-0 cursor-pointer"
+                style={{ accentColor: "#D4580A", width: 14, height: 14 }}
+              />
+              <span className="font-sans text-[10px] leading-relaxed" style={{ color: "#888888" }}>
+                Send me the weekly DR.DULLU digest — tips, new products, and content.
+                Unsubscribe any time.
+              </span>
+            </label>
+
+            <p className="font-sans text-[10px] leading-relaxed" style={{ color: "#CCCCCC" }}>
               {isFree
-                ? "By downloading you agree to receive occasional product updates. Unsubscribe any time."
-                : <>
-                    Digital products are non-refundable. By completing this purchase you confirm you have read the product description and agree to our{" "}
-                    <a href="/terms" className="underline underline-offset-2" style={{ color: "#AAAAAA" }}>Terms of Service</a>.
-                  </>
+                ? <>By downloading you agree to our <a href="/terms" className="underline underline-offset-2" style={{ color: "#AAAAAA" }}>Terms</a> and <a href="/privacy" className="underline underline-offset-2" style={{ color: "#AAAAAA" }}>Privacy Policy</a>.</>
+                : <>Digital products are non-refundable. By completing this purchase you confirm you have read the product description and agree to our{" "}<a href="/terms" className="underline underline-offset-2" style={{ color: "#AAAAAA" }}>Terms</a> and <a href="/privacy" className="underline underline-offset-2" style={{ color: "#AAAAAA" }}>Privacy Policy</a>.</>
               }
             </p>
           </form>

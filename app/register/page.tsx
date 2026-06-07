@@ -7,11 +7,12 @@ import Arr from "@/components/Arr";
 import { useAuth } from "@/context/AuthContext";
 
 export default function RegisterPage() {
-  const [name, setName]   = useState("");
-  const [email, setEmail] = useState("");
-  const [pass, setPass]   = useState("");
-  const [error, setError] = useState("");
-  const [busy, setBusy]   = useState(false);
+  const [name, setName]         = useState("");
+  const [email, setEmail]       = useState("");
+  const [pass, setPass]         = useState("");
+  const [marketing, setMarketing] = useState(false);
+  const [error, setError]       = useState("");
+  const [busy, setBusy]         = useState(false);
   const { refresh }       = useAuth();
   const router            = useRouter();
   const nameRef           = useRef<HTMLInputElement>(null);
@@ -26,7 +27,7 @@ export default function RegisterPage() {
       const res  = await fetch("/api/auth/register", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ name, email, password: pass }),
+        body:    JSON.stringify({ name, email, password: pass, marketingConsent: marketing }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? "Registration failed."); return; }
@@ -107,6 +108,21 @@ export default function RegisterPage() {
             >
               {busy ? "Creating account…" : <><span>Create Account</span> <Arr /></>}
             </button>
+
+            {/* Marketing consent — unticked by default, separate from terms */}
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={marketing}
+                onChange={(e) => setMarketing(e.target.checked)}
+                className="mt-0.5 shrink-0 cursor-pointer"
+                style={{ accentColor: "#D4580A", width: 14, height: 14 }}
+              />
+              <span className="font-sans text-[10px] leading-relaxed" style={{ color: "#888888" }}>
+                Send me the weekly DR.DULLU digest — new products, playbooks, and content.
+                I can unsubscribe at any time.
+              </span>
+            </label>
 
             <p className="font-sans text-[10px] text-center" style={{ color: "#AAAAAA" }}>
               By joining you agree to our{" "}
