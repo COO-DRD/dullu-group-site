@@ -114,9 +114,24 @@ export default function Hero() {
               fontSize: "clamp(1rem,13vw,18rem)",
               color: "#F8F5EB",
               fontWeight: 600,
+              display: "block",
             }}
           >
             DR.DULLU
+          </span>
+          <span
+            className="font-sans uppercase whitespace-nowrap"
+            style={{
+              display: "block",
+              textAlign: "center",
+              fontSize: "clamp(0.2rem,1.6vw,2.2rem)",
+              fontWeight: 400,
+              letterSpacing: "0.42em",
+              color: "rgba(248,245,235,0.50)",
+              marginTop: "0.55em",
+            }}
+          >
+            Systems · Brands · Built in Public
           </span>
         </div>
 
