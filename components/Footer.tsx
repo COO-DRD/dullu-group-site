@@ -109,13 +109,29 @@ export default function Footer() {
           <p className="font-sans text-xs font-light" style={{ color: "#AAAAAA" }}>
             © 2026 DR.DULLU · KILIFI, KENYA
           </p>
-          <a
-            href="mailto:shop@dullugroup.co.ke"
-            className="font-sans text-xs font-light transition-colors hover:text-amber"
-            style={{ color: "#AAAAAA" }}
-          >
-            shop@dullugroup.co.ke
-          </a>
+          <div className="flex flex-wrap items-center gap-5">
+            <Link
+              href="/terms"
+              className="font-sans text-xs font-light transition-colors hover:text-amber"
+              style={{ color: "#AAAAAA" }}
+            >
+              Terms &amp; Conditions
+            </Link>
+            <Link
+              href="/privacy"
+              className="font-sans text-xs font-light transition-colors hover:text-amber"
+              style={{ color: "#AAAAAA" }}
+            >
+              Privacy Policy
+            </Link>
+            <a
+              href="mailto:shop@dullugroup.co.ke"
+              className="font-sans text-xs font-light transition-colors hover:text-amber"
+              style={{ color: "#AAAAAA" }}
+            >
+              shop@dullugroup.co.ke
+            </a>
+          </div>
         </div>
 
       </div>

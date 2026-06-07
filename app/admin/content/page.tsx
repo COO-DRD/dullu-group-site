@@ -27,7 +27,12 @@ interface Release {
 }
 type Row = Workshop | Event | Announcement | Release;
 
-const EMPTY: Record<ContentType, Omit<Row, "id" | "created_at">> = {
+const EMPTY: {
+  workshops:     Omit<Workshop,     "id" | "created_at">;
+  events:        Omit<Event,        "id" | "created_at">;
+  announcements: Omit<Announcement, "id" | "created_at">;
+  releases:      Omit<Release,      "id" | "created_at">;
+} = {
   workshops:     { title: "", description: "", body: null, thumbnail_url: null, video_url: null, duration_min: null, scheduled_at: null, is_published: false },
   events:        { title: "", description: "", location: "Online", starts_at: "", ends_at: null, registration_url: null, is_published: false },
   announcements: { title: "", body: "", type: "announcement", cta_text: null, cta_url: null, expires_at: null, is_published: false },
