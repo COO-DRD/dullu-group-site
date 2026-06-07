@@ -7,15 +7,31 @@ import Footer from "@/components/Footer";
 import ProductPageClient from "@/components/shop/ProductPageClient";
 import type { Product } from "@/app/shop/page";
 
-const API = "https://dullu-shop-api.dullugroup.co.ke";
-
 async function getProduct(slug: string): Promise<Product | null> {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  if (!supabaseUrl || !supabaseKey) return null;
+
   try {
-    const res = await fetch(`${API}/api/products/${slug}`, {
-      next: { revalidate: 300 },
+    const params = new URLSearchParams({
+      slug: `eq.${slug}`,
+      active: 'eq.true',
+      select: '*',
+      limit: '1',
     });
+    const res = await fetch(
+      `${supabaseUrl}/rest/v1/shop_products?${params}`,
+      {
+        cache: 'no-store',
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+      }
+    );
     if (!res.ok) return null;
-    return res.json();
+    const rows = await res.json() as Product[];
+    return rows[0] ?? null;
   } catch {
     return null;
   }

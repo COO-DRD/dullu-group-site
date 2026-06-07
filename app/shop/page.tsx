@@ -29,10 +29,25 @@ export interface Product {
 }
 
 async function getProducts(): Promise<Product[]> {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+  if (!supabaseUrl || !supabaseKey) return [];
+
   try {
+    const params = new URLSearchParams({
+      active: 'eq.true',
+      select: 'id,slug,title,tagline,category,audience,price_kes,price_usd,cover_image,active',
+      order: 'sort_order.asc',
+    });
     const res = await fetch(
-      "https://dullu-shop-api.dullugroup.co.ke/api/products",
-      { cache: "no-store" }
+      `${supabaseUrl}/rest/v1/shop_products?${params}`,
+      {
+        cache: 'no-store',
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+      }
     );
     if (!res.ok) return [];
     return res.json();
