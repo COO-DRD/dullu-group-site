@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 
-const WORKER = "https://dullu-shop-api.dullugroup.co.ke";
+const WORKER = "https://dullu-shop-api.dr-dullu.workers.dev";
 
 export async function POST(req: NextRequest) {
   const session = await getSession();

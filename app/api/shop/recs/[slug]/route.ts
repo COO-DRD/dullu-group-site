@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const SUPA_URL  = process.env.SUPABASE_URL!;
 const SUPA_KEY  = process.env.SUPABASE_SERVICE_KEY!;
-const SHOP_API  = "https://dullu-shop-api.dullugroup.co.ke";
+const SHOP_API  = "https://dullu-shop-api.dr-dullu.workers.dev";
 const REC_COUNT = 3;
 
 interface Product {
