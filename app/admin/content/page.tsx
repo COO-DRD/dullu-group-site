@@ -7,7 +7,7 @@ type ContentType = "workshops" | "events" | "announcements" | "releases";
 // ── Row shapes ────────────────────────────────────────────────────────────────
 interface Workshop {
   id: string; title: string; description: string; body: string | null;
-  thumbnail_url: string | null; video_url: string | null; duration_min: number | null;
+  thumbnail_url: string | null; registration_url: string | null; duration_min: number | null;
   scheduled_at: string | null; is_published: boolean; created_at: string;
 }
 interface Event {
@@ -21,8 +21,8 @@ interface Announcement {
   is_published: boolean; created_at: string;
 }
 interface Release {
-  id: string; title: string; description: string; version: string | null;
-  product_slug: string | null; release_url: string | null;
+  id: string; title: string; description: string; type: "video" | "article" | "product";
+  version: string | null; product_slug: string | null; release_url: string | null;
   is_published: boolean; created_at: string;
 }
 type Row = Workshop | Event | Announcement | Release;
@@ -33,10 +33,10 @@ const EMPTY: {
   announcements: Omit<Announcement, "id" | "created_at">;
   releases:      Omit<Release,      "id" | "created_at">;
 } = {
-  workshops:     { title: "", description: "", body: null, thumbnail_url: null, video_url: null, duration_min: null, scheduled_at: null, is_published: false },
+  workshops:     { title: "", description: "", body: null, thumbnail_url: null, registration_url: null, duration_min: null, scheduled_at: null, is_published: false },
   events:        { title: "", description: "", location: "Online", starts_at: "", ends_at: null, registration_url: null, is_published: false },
   announcements: { title: "", body: "", type: "announcement", cta_text: null, cta_url: null, expires_at: null, is_published: false },
-  releases:      { title: "", description: "", version: null, product_slug: null, release_url: null, is_published: false },
+  releases:      { title: "", description: "", type: "video", version: null, product_slug: null, release_url: null, is_published: false },
 };
 
 const TABS: { key: ContentType; label: string }[] = [
@@ -172,7 +172,7 @@ export default function ContentAdminPage() {
           {tab === "workshops" && <>
             {s("Description (short)", w.description, set("description"), "textarea")}
             {s("Body (full content)", w.body, set("body"), "textarea")}
-            {s("Video URL", w.video_url, set("video_url"), "url")}
+            {s("Registration URL", w.registration_url, set("registration_url"), "url")}
             {s("Thumbnail URL", w.thumbnail_url, set("thumbnail_url"), "url")}
             {s("Duration (min)", String(w.duration_min ?? ""), (v) => set("duration_min")(v ? Number(v) as unknown as string : null as unknown as string), "number")}
             {s("Scheduled at", w.scheduled_at?.slice(0, 16) ?? "", (v) => set("scheduled_at")(v ? new Date(v).toISOString() : null as unknown as string), "datetime-local")}
@@ -194,10 +194,20 @@ export default function ContentAdminPage() {
           </>}
 
           {tab === "releases" && <>
+            <div className="flex flex-col gap-1">
+              <label className="font-sans text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: "#888" }}>Type</label>
+              <select value={r.type} onChange={(e) => setEditing({ ...editing, type: e.target.value })}
+                className="font-sans text-sm px-3 py-2 focus:outline-none"
+                style={{ backgroundColor: "#F9F9F9", border: "1px solid #E0E0E0", color: "#111" }}>
+                <option value="video">Video</option>
+                <option value="article">Article</option>
+                <option value="product">Product</option>
+              </select>
+            </div>
             {s("Description", r.description, set("description"), "textarea")}
             {s("Version (e.g. 1.2)", r.version, set("version"))}
             {s("Product Slug", r.product_slug, set("product_slug"))}
-            {s("Release URL", r.release_url, set("release_url"), "url")}
+            {s("URL", r.release_url, set("release_url"), "url")}
           </>}
 
           <div className="md:col-span-2 flex items-center gap-3">

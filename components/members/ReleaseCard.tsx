@@ -4,10 +4,17 @@ export interface Release {
   id: string;
   title: string;
   description: string;
+  type: "video" | "article" | "product";
   version?: string;
   product_slug?: string;
   release_url?: string;
   created_at: string;
+}
+
+function ctaLabel(type: Release["type"]) {
+  if (type === "video")   return "Watch";
+  if (type === "article") return "Read";
+  return "Access";
 }
 
 function timeAgo(iso: string) {
@@ -51,7 +58,7 @@ const TEMPLATES = [
           <a href={r.release_url} target="_blank" rel="noopener noreferrer"
             className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
             style={{ color: "#D4580A" }}>
-            Access <Arr />
+            {ctaLabel(r.type)} <Arr />
           </a>
         )}
       </div>
@@ -87,7 +94,7 @@ const TEMPLATES = [
         <a href={r.release_url} target="_blank" rel="noopener noreferrer"
           className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
           style={{ color: "#D4580A" }}>
-          Access <Arr />
+          {ctaLabel(r.type)} <Arr />
         </a>
       )}
     </div>
@@ -111,7 +118,7 @@ const TEMPLATES = [
         <a href={r.release_url} target="_blank" rel="noopener noreferrer"
           className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
           style={{ color: "#D4580A" }}>
-          Access <Arr />
+          {ctaLabel(r.type)} <Arr />
         </a>
       )}
     </div>

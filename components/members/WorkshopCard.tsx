@@ -5,7 +5,7 @@ export interface Workshop {
   title: string;
   description: string;
   thumbnail_url?: string;
-  video_url?: string;
+  registration_url?: string;
   duration_min?: number;
   scheduled_at?: string;
 }
@@ -31,15 +31,15 @@ const TEMPLATES = [
       <p className="font-sans font-light text-xs leading-relaxed mb-5" style={{ color: "rgba(248,245,235,0.5)" }}>
         {w.description}
       </p>
-      {w.video_url && (
+      {w.registration_url && (
         <a
-          href={w.video_url}
+          href={w.registration_url}
           target="_blank"
           rel="noopener noreferrer"
           className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1 transition-colors hover:text-white"
           style={{ color: "#D4580A" }}
         >
-          Watch <Arr />
+          Register <Arr />
         </a>
       )}
     </div>
