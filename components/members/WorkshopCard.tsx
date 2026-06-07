@@ -65,15 +65,15 @@ const TEMPLATES = [
       <p className="font-sans font-light text-xs leading-relaxed mb-5" style={{ color: "#777777" }}>
         {w.description}
       </p>
-      {w.video_url && (
+      {w.registration_url && (
         <a
-          href={w.video_url}
+          href={w.registration_url}
           target="_blank"
           rel="noopener noreferrer"
           className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1 transition-colors"
           style={{ color: "#D4580A" }}
         >
-          Watch <Arr />
+          Register <Arr />
         </a>
       )}
     </div>
@@ -100,15 +100,15 @@ const TEMPLATES = [
         <p className="font-sans font-light text-xs leading-relaxed mb-5" style={{ color: "#555555" }}>
           {w.description}
         </p>
-        {w.video_url && (
+        {w.registration_url && (
           <a
-            href={w.video_url}
+            href={w.registration_url}
             target="_blank"
             rel="noopener noreferrer"
             className="font-sans font-bold text-[10px] tracking-[0.18em] uppercase inline-flex items-center gap-1"
             style={{ color: "#D4580A" }}
           >
-            Watch <Arr />
+            Register <Arr />
           </a>
         )}
       </div>
