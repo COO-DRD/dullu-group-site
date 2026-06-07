@@ -7,7 +7,6 @@ import Arr from "@/components/Arr";
 interface Order {
   orderId:      string;
   productTitle: string;
-  productSlug:  string;
   amountKes:    number;
   createdAt:    string;
   downloadUrl:  string | null;
