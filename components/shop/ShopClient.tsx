@@ -12,6 +12,7 @@ const SHOP_API = "https://dullu-shop-api.dullugroup.co.ke";
 const TABS = [
   { key: "all",       label: "All"       },
   { key: "freebie",   label: "Free"      },
+  { key: "coaches",   label: "Coaches"   },
   { key: "sme",       label: "SME"       },
   { key: "corporate", label: "Corporate" },
 ];
@@ -35,6 +36,7 @@ export function ShopClient({ products: initial }: { products: Product[] }) {
   const filtered = products.filter((p) => {
     if (tab === "all")     return true;
     if (tab === "freebie") return p.price_kes === 0;
+    if (tab === "coaches") return p.audience === "coaches" || p.category === "coaches";
     return p.audience === tab || p.audience === "both";
   });
 
@@ -55,7 +57,7 @@ export function ShopClient({ products: initial }: { products: Product[] }) {
           The Shop
         </h1>
         <p className="font-sans font-light text-lg" style={{ color: "#666666", maxWidth: "32rem" }}>
-          Playbooks built for East African business reality.
+          Playbooks and system guides for coaches, consultants, and business operators.
           Start with a free download — no credit card, no friction.
         </p>
 

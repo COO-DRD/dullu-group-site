@@ -7,45 +7,45 @@ import Arr from "@/components/Arr";
 const leaks = [
   {
     n:    "01",
-    title: "The Response Gap",
-    body:  "Leads message you and buy from your competitor before you reply. Every hour of silence is a closed deal somewhere else.",
-    cta:   "Fix this",
-    href:  "/shop",
+    title: "The Manual Onboarding",
+    body:  "Every new client means hours of manual setup. Sending login details, intake forms, welcome emails by hand. One at a time. Every time.",
+    cta:   "Automate it",
+    href:  "/office",
   },
   {
     n:    "02",
-    title: "The Proposal Problem",
-    body:  "Quotes sent over WhatsApp chat. They scroll past it. You never had a real chance.",
-    cta:   "See the fix",
-    href:  "/shop",
+    title: "The Tool Chaos",
+    body:  "Kajabi for courses. Stripe for payments. Calendly for calls. ConvertKit for email. Slack for clients. None of them talk to each other.",
+    cta:   "Connect the stack",
+    href:  "/office",
   },
   {
     n:    "03",
-    title: "The Silent Quote",
-    body:  "The deal didn't die because they said no. It died because you never followed up.",
-    cta:   "Automate follow-up",
-    href:  "/shop",
+    title: "The Booking Black Hole",
+    body:  "Lead books a call. Gets a Calendly confirmation. Then silence. No nurture, no reminder, no follow-up if they ghost. You lose 30-40% there.",
+    cta:   "Fix the flow",
+    href:  "/office",
   },
   {
     n:    "04",
-    title: "The One-Transaction Client",
-    body:  "Clients who bought once and never heard from you again. Not because they left — because you never came back.",
-    cta:   "Build retention",
-    href:  "/shop",
+    title: "The Capacity Ceiling",
+    body:  "You cannot take another client without working more hours. The system cannot scale — so neither can you.",
+    cta:   "Break the ceiling",
+    href:  "/office",
   },
   {
     n:    "05",
-    title: "The Empty Review Page",
-    body:  "Happy clients who never left a review because you never asked. Your next client is reading a blank page.",
-    cta:   "Start collecting",
-    href:  "/shop",
+    title: "The Invisible Offboarding",
+    body:  "Program ends. Client disappears. No testimonial request, no referral ask, no upsell. Free revenue left on the table every single time.",
+    cta:   "Capture it",
+    href:  "/office",
   },
   {
     n:    "06",
-    title: "The Time Drain",
-    body:  "Two or more hours every day on work automation handles in seconds. You are paying yourself to do a robot's job.",
-    cta:   "Get the system",
-    href:  "/shop",
+    title: "The GHL Trap",
+    body:  "An agency sold you a sales funnel dressed as a coaching system. It runs your marketing. It does not run your business.",
+    cta:   "See what a real system looks like",
+    href:  "/office",
   },
 ];
 
@@ -147,7 +147,7 @@ export default function Problem() {
           className="font-sans font-black uppercase tracking-tight leading-[1.0]"
           style={{ fontSize: "clamp(2.8rem,7vw,7rem)", color: "#D4580A", maxWidth: "16ch" }}
         >
-          Most businesses don&apos;t have a product problem.
+          Most coaches don&apos;t have a delivery problem.
         </h2>
       </div>
 
@@ -174,11 +174,11 @@ export default function Problem() {
       {/* Section footer CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
         <Link
-          href="/shop?product=african-business-audit"
+          href="/office"
           className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-10 py-5 inline-block transition-all hover:brightness-110"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
         >
-          Take the free 2-minute audit <Arr />
+          Book a free system audit call <Arr />
         </Link>
       </div>
 

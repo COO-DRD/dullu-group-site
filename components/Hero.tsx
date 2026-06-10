@@ -131,7 +131,7 @@ export default function Hero() {
               marginTop: "0.55em",
             }}
           >
-            Systems · Brands · Built in Public
+            Coaching Systems · Built in Public
           </span>
         </div>
 

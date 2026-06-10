@@ -24,9 +24,9 @@ const proof = [
   },
   {
     label: "04 — Product",
-    title: "The Operator Stack",
-    body: "The three-component infrastructure originally built for DDi — Firm Presence, Authority Site, Lead Machine — now packaged and deployed for operators who are done looking like freelancers.",
-    tag: "Live in 14 days",
+    title: "Coaching System Build",
+    body: "The full client journey automated — lead capture, onboarding, delivery, offboarding. Built for coaches billing $10k–$30k/month who are hitting an ops ceiling. Custom to your brand, not a GHL template.",
+    tag: "4–6 week build",
   },
 ];
 
@@ -67,9 +67,8 @@ export default function Proof() {
             style={{ color: "#555555", maxWidth: "46rem", fontSize: "1.05rem" }}
           >
             DR.DULLU is the alter ego Ian Dullu built when he decided that knowledge, audacity, and the commitment to
-            excellence were credentials enough. From Kilifi, Kenya — not Nairobi, not Silicon Valley — he shipped an
-            automation agency, a lead intelligence platform, and a personal brand documenting every step. No funding.
-            No team. No shortcuts.
+            excellence were credentials enough. From Kilifi, Kenya — not Nairobi, not Silicon Valley — he builds coaching
+            systems, ships lead intelligence tools, and documents every step in public. No funding. No team. No shortcuts.
           </p>
         </div>
 
