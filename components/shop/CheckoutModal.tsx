@@ -7,9 +7,41 @@ import type { Product } from "@/app/shop/page";
 import type { RecProduct } from "@/app/api/shop/recs/[slug]/route";
 import { useAuth } from "@/context/AuthContext";
 
-const API = "https://dullu-shop-api.dullugroup.co.ke";
+const API   = "https://dullu-shop-api.dullugroup.co.ke";
+const MPESA = "0790117187";
+
+const MpesaIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+  </svg>
+);
+
+const PayPalIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M7.076 21.337H4.19a.641.641 0 0 1-.633-.74L6.276 2.8a.773.773 0 0 1 .762-.648h5.946c2.676 0 4.51.557 5.456 1.657.455.532.733 1.094.848 1.717.12.654.098 1.43-.065 2.371l-.007.044v.387l.425.242a2.98 2.98 0 0 1 .864.719c.365.462.6 1.053.697 1.758.1.726.067 1.59-.098 2.568-.19 1.13-.5 2.114-.921 2.923a5.416 5.416 0 0 1-1.463 1.832c-.565.448-1.234.785-1.99.999-.735.208-1.578.314-2.505.314h-.598a1.85 1.85 0 0 0-1.826 1.561l-.077.415-.615 3.893-.028.145a.096.096 0 0 1-.095.082H7.076z" opacity=".8"/>
+    <path d="M20.063 7.99c-.022.143-.047.29-.076.44-.982 5.04-4.344 6.782-8.637 6.782H9.19a1.062 1.062 0 0 0-1.049.899l-1.12 7.103-.317 2.01a.558.558 0 0 0 .55.645h3.872c.46 0 .852-.335.924-.789l.038-.199.733-4.648.047-.257a.935.935 0 0 1 .924-.789h.582c3.769 0 6.717-1.531 7.578-5.958.36-1.847.174-3.389-.777-4.474a3.713 3.713 0 0 0-1.016-.765z"/>
+  </svg>
+);
 
 type Step = "form" | "processing" | "success" | "error";
+
+function TipButton({ icon, label, copiedLabel, onClick, border, color }: {
+  icon: React.ReactNode; label: string; copiedLabel: string;
+  onClick: () => void; border: string; color: string;
+}) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={() => { onClick(); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
+      className="flex-1 flex items-center justify-center gap-2 py-2.5 font-sans text-[11px] font-light transition-all hover:bg-orange-50 cursor-pointer"
+      style={{ border: `1px solid ${border}`, color, background: "transparent" }}
+    >
+      {icon}
+      {copied ? copiedLabel : label}
+    </button>
+  );
+}
 
 export default function CheckoutModal({
   product,
@@ -229,6 +261,32 @@ export default function CheckoutModal({
                   Download Now <Arr />
                 </a>
               )}
+
+              <div className="mt-8 pt-6 border-t" style={{ borderColor: "#F0EDE8" }}>
+                <p className="font-sans text-[10px] font-semibold tracking-[0.18em] uppercase mb-3" style={{ color: "#AAAAAA" }}>
+                  If this helped you
+                </p>
+                <div className="flex gap-3">
+                  <TipButton
+                    icon={<MpesaIcon />}
+                    label={`M-Pesa · ${MPESA}`}
+                    copiedLabel="Copied!"
+                    onClick={() => navigator.clipboard.writeText(MPESA).catch(() => {})}
+                    border="#D4580A"
+                    color="#D4580A"
+                  />
+                  <a
+                    href="https://www.paypal.com/ncp/payment/SMQWWPUYBGL6Q"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 py-2.5 font-sans text-[11px] font-light transition-all hover:bg-gray-50"
+                    style={{ border: "1px solid #DDDDDD", color: "#888888" }}
+                  >
+                    <PayPalIcon />
+                    PayPal
+                  </a>
+                </div>
+              </div>
             </div>
 
             {recs.length > 0 && (
