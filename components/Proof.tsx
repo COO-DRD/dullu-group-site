@@ -23,10 +23,10 @@ const proof = [
     tag: "@dr.dullu",
   },
   {
-    label: "04 — Product",
-    title: "Coaching System Build",
-    body: "The full client journey automated — lead capture, onboarding, delivery, offboarding. Built for coaches billing $10k–$30k/month who are hitting an ops ceiling. Custom to your brand, not a GHL template.",
-    tag: "4–6 week build",
+    label: "04 — Community",
+    title: "The Young African Founder",
+    body: "A growing community of African founders and lean sales & marketing teams who share what they learn. Free automation walkthroughs, real case studies, and strategy — no gatekeeping.",
+    tag: "Free to join",
   },
 ];
 
@@ -67,7 +67,7 @@ export default function Proof() {
             style={{ color: "#555555", maxWidth: "46rem", fontSize: "1.05rem" }}
           >
             DR.DULLU is the alter ego Ian Dullu built when he decided that knowledge, audacity, and the commitment to
-            excellence were credentials enough. From Kilifi, Kenya — not Nairobi, not Silicon Valley — he builds coaching
+            excellence were credentials enough. From Kilifi, Kenya — not Nairobi, not Silicon Valley — he builds automation
             systems, ships lead intelligence tools, and documents every step in public. No funding. No team. No shortcuts.
           </p>
         </div>
@@ -126,11 +126,11 @@ export default function Proof() {
 
         <div style={{ marginTop: "4.5rem" }}>
           <Link
-            href="/office"
+            href="/shop"
             className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
             style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem" }}
           >
-            Work with Ian →
+            Get the Free Library →
           </Link>
         </div>
 

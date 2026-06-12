@@ -4,25 +4,25 @@ import { useEffect, useRef } from "react";
 
 const panels = [
   {
-    label:  "Coaching System Build",
+    label:  "Free Library",
     n:      "01",
-    heading: "The backend your coaching business actually needs.",
-    body:    "End-to-end system built around Kajabi and the tools you already trust. Lead capture, onboarding, delivery, offboarding — all automated. Not a GHL template. Custom to your brand.",
-    price:  "From $3,500",
-    cta:    "Book a scoping call",
-    href:   "/office",
+    heading: "Tools built for East African founders. Free.",
+    body:    "Automation scripts, AI prompt starters, Excel packs, business audit frameworks — built from real client work and shared at no cost. No card. No signup. Just take what helps.",
+    price:  "Free. Always.",
+    cta:    "Open the Library",
+    href:   "/shop",
     photo:  "/dr-standing.jpg",
     pos:    "center top",
     accent: "#D4580A",
   },
   {
-    label:  "The Operator Stack",
+    label:  "The Young African Founder",
     n:      "02",
-    heading: "Brand, site, and lead machine. Two weeks.",
-    body:    "Full infrastructure for coaches and consultants who are done looking like freelancers. Firm presence, authority site, outbound lead system. Built through Dullu Digital.",
-    price:  "From $900",
-    cta:    "Go to Dullu Digital",
-    href:   "https://digital.dullugroup.co.ke",
+    heading: "A community that builds in public.",
+    body:    "Founders who share what they learn, no gatekeeping. If the work helps you, send goodwill — it keeps the free stuff coming. Your name goes in the credits of everything built from here.",
+    price:  "Free to join",
+    cta:    "Join the Community",
+    href:   "/#goodwill",
     photo:  "/dr-seated.jpg",
     pos:    "center 20%",
     accent: "#1B3D8F",
@@ -30,7 +30,7 @@ const panels = [
   {
     label:  "Lead Intelligence",
     n:      "03",
-    heading: "500 leads before your competitor finds five.",
+    heading: "500 qualified leads before your competitor finds five.",
     body:    "4unter finds, enriches and AI-scores leads from any market. Fire outreach directly or import to any pipeline.",
     price:  "Free trial",
     cta:    "Try 4unter",
@@ -158,7 +158,7 @@ export default function WhatIBuild() {
           className="font-sans font-black uppercase tracking-tight leading-[1.0]"
           style={{ fontSize: "clamp(2.8rem,7vw,7rem)", color: "#D4580A", maxWidth: "14ch" }}
         >
-          Three ways to put the weapons to work.
+          Built in public. Free for the community.
         </h2>
       </div>
 

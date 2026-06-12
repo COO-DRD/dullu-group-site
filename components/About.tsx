@@ -117,8 +117,8 @@ export default function About() {
               className="font-sans font-light leading-relaxed"
               style={{ color: "rgba(248,245,235,0.78)", maxWidth: "44rem", marginBottom: "0.75rem", fontSize: "1.05rem" }}
             >
-              Ian Dullu is building a complete business operation from Kilifi, Kenya — automation agency,
-              lead intelligence tool, digital product shop — all under $100/month in tools.
+              Ian Dullu builds automation systems, sales & marketing infrastructure, and lead intelligence tools
+              from Kilifi, Kenya — showing lean teams how to do more with less. All under $100/month in tools.
             </p>
 
             <p
@@ -130,11 +130,11 @@ export default function About() {
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center" }}>
               <Link
-                href="/office"
+                href="/shop"
                 className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
                 style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem" }}
               >
-                Book a Call <Arr />
+                Free Library <Arr />
               </Link>
 
               {socials.map(({ label, href }) => (
@@ -200,11 +200,11 @@ export default function About() {
 
         <div style={{ maxWidth: "72rem", margin: "2rem auto 0", padding: "0 2rem" }}>
           <Link
-            href="/office"
+            href="/#goodwill"
             className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
             style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem", marginTop: "1rem" }}
           >
-            Let&apos;s Talk <Arr />
+            Join the Community <Arr />
           </Link>
         </div>
       </section>

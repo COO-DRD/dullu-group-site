@@ -7,6 +7,7 @@ const Problem    = dynamic(() => import("@/components/Problem"),    { ssr: false
 const Proof      = dynamic(() => import("@/components/Proof"),      { ssr: false });
 const WhatIBuild = dynamic(() => import("@/components/WhatIBuild"), { ssr: false });
 const About      = dynamic(() => import("@/components/About"),      { ssr: false });
+const Goodwill   = dynamic(() => import("@/components/Goodwill"),   { ssr: false });
 
 export default function HomeMain() {
   return (
@@ -16,6 +17,7 @@ export default function HomeMain() {
       <WhatIBuild />
       <Subscribe />
       <About />
+      <Goodwill />
     </>
   );
 }

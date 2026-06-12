@@ -59,16 +59,16 @@ export default function Subscribe() {
           className="font-sans font-black uppercase tracking-tight leading-[1.0] mb-6"
           style={{ fontSize: "clamp(2.6rem,6vw,6rem)", color: "#F8F5EB", maxWidth: "20ch" }}
         >
-          The real stuff. Subscribers only.
+          Do more with less. Every week.
         </h2>
 
         <p
           className="font-sans font-light leading-relaxed mb-12"
           style={{ color: "rgba(248,245,235,0.55)", maxWidth: "36rem", fontSize: "1.05rem" }}
         >
-          Automation walkthroughs, raw case studies from Kenyan businesses,
-          and short insights that don&apos;t get posted anywhere else.
-          No AI fluff. No noise. Unsubscribe any time.
+          Automation walkthroughs, sales & marketing strategy, and raw case studies
+          from lean teams doing more than their headcount suggests.
+          Built in public from Kilifi, Kenya. No AI fluff. Unsubscribe any time.
         </p>
 
         {done ? (
@@ -84,7 +84,7 @@ export default function Subscribe() {
                 You&apos;re in. Check your inbox — first drop is on its way.
               </p>
               <p className="font-sans text-xs mt-1" style={{ color: "rgba(248,245,235,0.45)" }}>
-                While you wait, grab one of the 6 free resources in the shop.
+                While you wait, grab something from the free library.
               </p>
             </div>
           </div>

@@ -131,7 +131,7 @@ export default function Hero() {
               marginTop: "0.55em",
             }}
           >
-            Coaching Systems · Built in Public
+            Automation & Strategy · Built in Public
           </span>
         </div>
 
@@ -153,7 +153,7 @@ export default function Hero() {
               className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-9 py-4 transition-all hover:brightness-110"
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
             >
-              Get the Playbooks <Arr />
+              Get the Free Library <Arr />
             </Link>
             <Link
               href="/office"

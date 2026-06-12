@@ -31,63 +31,55 @@ const GHOST_CTA = (href: string, text: string) =>
 
 export function subscriberWelcomeHtml(): string {
   return SHELL(`
-    ${LABEL("DR.DULLU — Subscriber Drop")}
+    ${LABEL("The Young African Founder")}
     <h1 style="font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:#111111;margin:0 0 16px;line-height:1.1;text-transform:uppercase;letter-spacing:-0.02em;">
       You're in.
     </h1>
     <p style="color:#444444;font-size:15px;line-height:1.8;margin:0 0 24px;font-family:Arial,sans-serif;">
-      Automation walkthroughs, raw case studies from Kenyan businesses, and
-      short insights that don't get posted publicly. The real stuff. No AI fluff.
+      This is a community of young African founders who share what they learn —
+      no gatekeeping, no paywalls, no fluff. Automation walkthroughs, raw case studies,
+      tools built for the East African reality. Free. Always.
     </p>
     <div style="border-left:3px solid #D4580A;padding:16px 20px;margin:0 0 28px;background:#FFF8F4;">
       <p style="font-size:14px;color:#111111;line-height:1.8;margin:0;font-family:Arial,sans-serif;">
-        First drop lands in your inbox shortly. While you wait — there are
-        <strong>6 free resources</strong> in the shop you can grab right now, no card required.
+        The first drop lands in your inbox shortly. In the meantime — everything in the
+        library is already yours. No card, no catch.
       </p>
     </div>
-    ${CTA(`${SITE}/shop`, "Browse Free Resources")}
+    ${CTA(`${SITE}/shop`, "Open the Free Library")}
   `);
 }
 
-export const subscriberWelcomeSubject = "You're in — here's what's coming";
+export const subscriberWelcomeSubject = "You're in — The Young African Founder";
 
 // ── Account registration welcome ─────────────────────────────────────────────
 
 export function registrationWelcomeHtml(name: string): string {
   const first = name.split(" ")[0];
   return SHELL(`
-    ${LABEL("DR.DULLU — Welcome")}
+    ${LABEL("The Young African Founder")}
     <h1 style="font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:#111111;margin:0 0 16px;line-height:1.1;text-transform:uppercase;letter-spacing:-0.02em;">
       Welcome, ${first}.
     </h1>
     <p style="color:#444444;font-size:15px;line-height:1.8;margin:0 0 24px;font-family:Arial,sans-serif;">
-      Your account is live. Your dashboard is where the real content lives —
-      workshops, drops, announcements, and your downloads. Bookmark it.
+      You're now part of The Young African Founder — a community where the tools are
+      free and the knowledge is real. Your dashboard is where everything lives:
+      workshops, drops, and resources built for the East African business reality.
     </p>
     <div style="background:#F8F5EB;padding:24px;margin:0 0 28px;border-left:3px solid #D4580A;">
-      <p style="font-size:10px;letter-spacing:0.18em;color:#D4580A;text-transform:uppercase;margin:0 0 10px;font-family:Arial,sans-serif;font-weight:700;">
-        Start here — free, no card
-      </p>
       <p style="font-size:14px;color:#111111;line-height:1.8;margin:0 0 16px;font-family:Arial,sans-serif;">
-        6 free downloads: WhatsApp automation scripts, AI prompt starters, Excel packs,
-        and business audit frameworks built for East African business reality.
+        WhatsApp automation scripts, AI prompt starters, Excel packs, business audit
+        frameworks — all in the free library. No card, no catch. Take what helps.
       </p>
-      ${CTA(`${SITE}/shop`, "Get Your Free Resources")}
+      ${CTA(DASH, "Open Your Dashboard")}
     </div>
-    <p style="color:#666666;font-size:14px;line-height:1.8;margin:0 0 20px;font-family:Arial,sans-serif;">
-      When you're ready to go deeper, paid playbooks are step-by-step implementation
-      guides — not theory, actual workflows. And if you want a 30-minute call to map
-      the highest-leverage automation in your business, that's available too.
+    <p style="color:#888888;font-size:13px;line-height:1.8;margin:0;font-family:Arial,sans-serif;">
+      We lift as we climb. Share anything useful with another founder who needs it.
     </p>
-    <div>
-      ${CTA(`${SITE}/shop`, "Browse the Shop")}
-      &nbsp;&nbsp;
-      ${GHOST_CTA(`${SITE}/office`, "Book a Call")}
-    </div>
   `);
 }
 
-export const registrationWelcomeSubject = "Your DR.DULLU account is live";
+export const registrationWelcomeSubject = "Welcome to The Young African Founder";
 
 // ── Weekly member digest ──────────────────────────────────────────────────────
 
@@ -197,3 +189,55 @@ export function weeklyDigestSubject(count: number): string {
     ? "1 new drop in your dashboard this week"
     : `${count} new drops in your dashboard this week`;
 }
+
+// ── Goodwill thank-you ────────────────────────────────────────────────────────
+
+export function goodwillThankYouHtml(name: string): string {
+  const first = name.split(" ")[0];
+  return SHELL(`
+    ${LABEL("The Young African Founder")}
+    <h1 style="font-family:Arial,sans-serif;font-size:28px;font-weight:900;color:#111111;margin:0 0 16px;line-height:1.1;text-transform:uppercase;letter-spacing:-0.02em;">
+      Thank you, ${first}.
+    </h1>
+    <p style="color:#444444;font-size:15px;line-height:1.8;margin:0 0 24px;font-family:Arial,sans-serif;">
+      Seriously. Support like yours is what keeps everything here free for the next
+      founder who needs it.
+    </p>
+    <div style="border-left:3px solid #D4580A;padding:16px 20px;margin:0 0 28px;background:#FFF8F4;">
+      <p style="font-size:14px;color:#111111;line-height:1.8;margin:0;font-family:Arial,sans-serif;">
+        Your name will appear in the credits of everything I build from here —
+        that's the deal. The Young African Founder community builds together.
+      </p>
+    </div>
+    <p style="color:#666666;font-size:14px;line-height:1.8;margin:0 0 20px;font-family:Arial,sans-serif;">
+      I'll follow up in a few days with what's dropping next for the community.
+      In the meantime — grab anything from the free library that's useful.
+    </p>
+    ${GHOST_CTA(`${SITE}/shop`, "Open the Free Library")}
+  `);
+}
+
+export const goodwillThankYouSubject = "Thank you — you're in the credits";
+
+// ── Goodwill follow-up ────────────────────────────────────────────────────────
+
+export function goodwillFollowUpHtml(name: string): string {
+  const first = name.split(" ")[0];
+  return SHELL(`
+    ${LABEL("The Young African Founder")}
+    <h1 style="font-family:Arial,sans-serif;font-size:24px;font-weight:900;color:#111111;margin:0 0 16px;line-height:1.1;text-transform:uppercase;letter-spacing:-0.02em;">
+      You're in the credits, ${first}.
+    </h1>
+    <p style="color:#444444;font-size:15px;line-height:1.8;margin:0 0 24px;font-family:Arial,sans-serif;">
+      Your name is live on the site — listed under the supporters who make the
+      free work possible. Thank you again.
+    </p>
+    <p style="color:#666666;font-size:14px;line-height:1.8;margin:0 0 28px;font-family:Arial,sans-serif;">
+      If you ever want to share feedback, suggest what to build next, or just say
+      something — hit reply. I read every message.
+    </p>
+    ${CTA(`${SITE}`, "See What's New")}
+  `);
+}
+
+export const goodwillFollowUpSubject = "You're in the credits — and here's what's next";

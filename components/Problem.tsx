@@ -7,45 +7,45 @@ import Arr from "@/components/Arr";
 const leaks = [
   {
     n:    "01",
-    title: "The Manual Onboarding",
-    body:  "Every new client means hours of manual setup. Sending login details, intake forms, welcome emails by hand. One at a time. Every time.",
-    cta:   "Automate it",
-    href:  "/office",
+    title: "The Manual Follow-Up",
+    body:  "Your best rep is spending 3 hours a day on follow-ups that a $0 automation could handle. Every hour in a spreadsheet is an hour not selling.",
+    cta:   "Get the automation",
+    href:  "/shop",
   },
   {
     n:    "02",
-    title: "The Tool Chaos",
-    body:  "Kajabi for courses. Stripe for payments. Calendly for calls. ConvertKit for email. Slack for clients. None of them talk to each other.",
+    title: "The Disconnected Stack",
+    body:  "CRM in one tab, email platform in another, lead data in a third. Nothing triggers anything. Every handoff is manual. Every update is a copy-paste.",
     cta:   "Connect the stack",
-    href:  "/office",
+    href:  "/shop",
   },
   {
     n:    "03",
-    title: "The Booking Black Hole",
-    body:  "Lead books a call. Gets a Calendly confirmation. Then silence. No nurture, no reminder, no follow-up if they ghost. You lose 30-40% there.",
-    cta:   "Fix the flow",
-    href:  "/office",
+    title: "The Reporting Trap",
+    body:  "3 hours every Monday to pull numbers that should generate themselves. The people who should be making strategy are making spreadsheets.",
+    cta:   "Automate the report",
+    href:  "/shop",
   },
   {
     n:    "04",
-    title: "The Capacity Ceiling",
-    body:  "You cannot take another client without working more hours. The system cannot scale — so neither can you.",
-    cta:   "Break the ceiling",
-    href:  "/office",
+    title: "The Leaky Funnel",
+    body:  "Leads go cold between touchpoints. No trigger-based nurture, no re-engagement sequence, no alert when a prospect goes quiet. Revenue disappears silently.",
+    cta:   "Plug the leak",
+    href:  "/shop",
   },
   {
     n:    "05",
-    title: "The Invisible Offboarding",
-    body:  "Program ends. Client disappears. No testimonial request, no referral ask, no upsell. Free revenue left on the table every single time.",
-    cta:   "Capture it",
-    href:  "/office",
+    title: "The Content Bottleneck",
+    body:  "One person writing every email, every follow-up sequence, every post manually. The pipeline stalls when they are overwhelmed — which is always.",
+    cta:   "Build the machine",
+    href:  "/shop",
   },
   {
     n:    "06",
-    title: "The GHL Trap",
-    body:  "An agency sold you a sales funnel dressed as a coaching system. It runs your marketing. It does not run your business.",
-    cta:   "See what a real system looks like",
-    href:  "/office",
+    title: "The Budget Ceiling",
+    body:  "Can't hire. Can't scale manually. Stuck between what a lean team can physically do and what the revenue target demands. Automation is the only way through.",
+    cta:   "See what's possible",
+    href:  "/shop",
   },
 ];
 
@@ -141,13 +141,13 @@ export default function Problem() {
       {/* Section header */}
       <div ref={headRef} className="reveal max-w-6xl mx-auto px-6 pt-28 pb-16">
         <p className="font-sans text-[10px] font-semibold tracking-[0.28em] uppercase mb-5" style={{ color: "#1B3D8F" }}>
-          Where the money is going
+          Where the revenue is going
         </p>
         <h2
           className="font-sans font-black uppercase tracking-tight leading-[1.0]"
           style={{ fontSize: "clamp(2.8rem,7vw,7rem)", color: "#D4580A", maxWidth: "16ch" }}
         >
-          Most coaches don&apos;t have a delivery problem.
+          Most lean teams don&apos;t have a talent problem.
         </h2>
       </div>
 
@@ -174,11 +174,11 @@ export default function Problem() {
       {/* Section footer CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
         <Link
-          href="/office"
+          href="/shop"
           className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-10 py-5 inline-block transition-all hover:brightness-110"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
         >
-          Book a free system audit call <Arr />
+          Get the free resources <Arr />
         </Link>
       </div>
 
