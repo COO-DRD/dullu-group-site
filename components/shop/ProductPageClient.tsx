@@ -86,11 +86,9 @@ export default function ProductPageClient({ product }: { product: Product }) {
           </span>
           <span
             className="font-sans font-semibold tracking-[0.12em] uppercase px-3 py-1"
-            style={isFree
-              ? { backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 10 }
-              : { border: "1px solid #D4580A", color: "#D4580A", fontSize: 10 }}
+            style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 10 }}
           >
-            {isFree ? "Free" : `KES ${product.price_kes.toLocaleString()}`}
+            Free
           </span>
           <ShareButton slug={product.slug} title={product.title} />
         </div>
@@ -117,13 +115,8 @@ export default function ProductPageClient({ product }: { product: Product }) {
           className="font-sans font-bold tracking-[0.2em] uppercase px-10 py-5 transition-all hover:brightness-110 cursor-pointer"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 11 }}
         >
-          {isFree ? "Download for Free" : `Get It for KES ${product.price_kes.toLocaleString()}`} <Arr />
+          Download for Free <Arr />
         </button>
-        {!isFree && (
-          <p className="font-sans text-[10px] mt-3" style={{ color: "#BBBBBB" }}>
-            M-Pesa STK push · Digital delivery in seconds
-          </p>
-        )}
       </div>
 
       {/* Description */}
@@ -206,7 +199,7 @@ export default function ProductPageClient({ product }: { product: Product }) {
           className="font-sans font-bold tracking-[0.2em] uppercase px-10 py-5 transition-all hover:brightness-110 cursor-pointer"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 11 }}
         >
-          {isFree ? "Download for Free" : `Pay KES ${product.price_kes.toLocaleString()} via M-Pesa`} <Arr />
+          Download for Free <Arr />
         </button>
       </div>
 
@@ -252,11 +245,9 @@ export default function ProductPageClient({ product }: { product: Product }) {
                 </div>
                 <span
                   className="shrink-0 self-center font-sans font-semibold tracking-[0.1em] uppercase px-2 py-1"
-                  style={rec.price_kes === 0
-                    ? { backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 9 }
-                    : { border: "1px solid #D4580A", color: "#D4580A", fontSize: 9 }}
+                  style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: 9 }}
                 >
-                  {rec.price_kes === 0 ? "Free" : `KES ${rec.price_kes.toLocaleString()}`}
+                  Free
                 </span>
               </Link>
             ))}

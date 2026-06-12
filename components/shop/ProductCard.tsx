@@ -89,11 +89,9 @@ export default function ProductCard({
               </span>
               <span
                 className="font-sans font-semibold tracking-[0.12em] uppercase px-2 py-1 shrink-0"
-                style={isFree
-                  ? { backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "10px" }
-                  : { border: "1px solid #D4580A", color: "#D4580A", fontSize: "10px" }}
+                style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "10px" }}
               >
-                {isFree ? "Free" : `KES ${product.price_kes.toLocaleString()}`}
+                Free
               </span>
             </div>
           </button>
@@ -139,7 +137,7 @@ export default function ProductCard({
                   className="font-sans font-bold tracking-[0.2em] uppercase px-7 py-3 border transition-all hover:brightness-110 cursor-pointer"
                   style={{ borderColor: "#D4580A", color: "#D4580A", fontSize: "11px" }}
                 >
-                  {isFree ? "Get for Free" : "Buy Now"} <Arr />
+                  Download <Arr />
                 </button>
               </div>
             </div>
@@ -235,11 +233,9 @@ export default function ProductCard({
                         </div>
                         <span
                           className="shrink-0 self-center font-sans font-semibold tracking-[0.1em] uppercase px-2 py-1"
-                          style={rec.price_kes === 0
-                            ? { backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "10px" }
-                            : { border: "1px solid #D4580A", color: "#D4580A", fontSize: "10px" }}
+                          style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "10px" }}
                         >
-                          {rec.price_kes === 0 ? "Free" : `KES ${rec.price_kes.toLocaleString()}`}
+                          Free
                         </span>
                       </Link>
                     ))}
@@ -254,7 +250,7 @@ export default function ProductCard({
                   className="font-sans font-bold tracking-[0.2em] uppercase px-9 py-4 transition-all hover:brightness-110 cursor-pointer"
                   style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px" }}
                 >
-                  {isFree ? "Download for Free" : `Buy for KES ${product.price_kes.toLocaleString()}`} <Arr />
+                  Download <Arr />
                 </button>
               </div>
 
