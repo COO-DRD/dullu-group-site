@@ -200,7 +200,7 @@ export default function About() {
 
         <div style={{ maxWidth: "72rem", margin: "2rem auto 0", padding: "0 2rem" }}>
           <Link
-            href="/#goodwill"
+            href="https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p"
             className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
             style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem", marginTop: "1rem" }}
           >

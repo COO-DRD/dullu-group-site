@@ -6,11 +6,12 @@ import { useAuth } from "@/context/AuthContext";
 import Arr from "@/components/Arr";
 
 const TYAF_LINKS = [
-  { label: "YouTube",   href: "https://www.youtube.com/@Dr_Dullu" },
-  { label: "LinkedIn",  href: "https://www.linkedin.com/in/drdullu/" },
-  { label: "Instagram", href: "https://www.instagram.com/dr.dullu/" },
-  { label: "Substack",  href: "https://drdullu.substack.com/" },
-  { label: "Medium",    href: "https://medium.com/@dr.dullu" },
+  { label: "WhatsApp Channel", href: "https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p" },
+  { label: "YouTube",          href: "https://www.youtube.com/@Dr_Dullu" },
+  { label: "LinkedIn",         href: "https://www.linkedin.com/in/drdullu/" },
+  { label: "Instagram",        href: "https://www.instagram.com/dr.dullu/" },
+  { label: "Substack",         href: "https://drdullu.substack.com/" },
+  { label: "Medium",           href: "https://medium.com/@dr.dullu" },
 ];
 
 export default function Navbar() {
