@@ -54,11 +54,11 @@ export function ShopClient({ products: initial }: { products: Product[] }) {
           className="font-sans font-black text-5xl md:text-6xl uppercase tracking-tight mb-4"
           style={{ color: "#D4580A" }}
         >
-          The Shop
+          The Library
         </h1>
         <p className="font-sans font-light text-lg" style={{ color: "#666666", maxWidth: "32rem" }}>
-          Playbooks and system guides for coaches, consultants, and business operators.
-          Start with a free download — no credit card, no friction.
+          Templates, scripts, and resources that go with the tools. Use the Cold Email Diagnostic
+          first — then grab the templates that match what needs fixing.
         </p>
 
         {!user && (

@@ -126,11 +126,11 @@ export default function Proof() {
 
         <div style={{ marginTop: "4.5rem" }}>
           <Link
-            href="/shop"
+            href="/tools/cold-email"
             className="font-sans font-bold uppercase tracking-[0.2em] transition-all hover:brightness-110 inline-block"
             style={{ backgroundColor: "#D4580A", color: "#FFFFFF", fontSize: "11px", padding: "1rem 2.25rem" }}
           >
-            Get the Free Library →
+            Try the Free Tools →
           </Link>
         </div>
 

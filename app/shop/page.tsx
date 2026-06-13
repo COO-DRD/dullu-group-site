@@ -6,9 +6,9 @@ import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "The Shop — DR.DULLU",
+  title: "The Library — DR.DULLU",
   description:
-    "Playbooks and automation systems for East African business owners. Start free. Build serious.",
+    "Free templates, automation scripts, and resources that complement the tools. Cold email templates, CRM setups, outreach frameworks. No card, no catch.",
 };
 
 export interface Product {

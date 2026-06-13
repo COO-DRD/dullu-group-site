@@ -81,7 +81,8 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/shop" className={navLinkCls} style={navLinkStyle}>Shop</Link>
+          <Link href="/shop" className={navLinkCls} style={navLinkStyle}>Library</Link>
+          <Link href="/tools/cold-email" className={navLinkCls} style={navLinkStyle}>Tools</Link>
           <Link href="/about" className={navLinkCls} style={navLinkStyle}>About</Link>
 
           {/* TYAF dropdown */}
@@ -217,7 +218,10 @@ export default function Navbar() {
         >
           <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col gap-5">
             <Link href="/shop" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors">
-              Shop
+              Library
+            </Link>
+            <Link href="/tools/cold-email" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors">
+              Tools
             </Link>
             <Link href="/about" onClick={() => setOpen(false)} className="font-sans text-sm font-medium text-ink hover:text-amber transition-colors">
               About

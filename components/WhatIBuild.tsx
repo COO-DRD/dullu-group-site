@@ -4,13 +4,13 @@ import { useEffect, useRef } from "react";
 
 const panels = [
   {
-    label:  "Free Library",
+    label:  "Cold Email Diagnostic",
     n:      "01",
-    heading: "Tools built for East African founders. Free.",
-    body:    "Automation scripts, AI prompt starters, Excel packs, business audit frameworks — built from real client work and shared at no cost. No card. No signup. Just take what helps.",
+    heading: "Know exactly why your cold emails fail.",
+    body:    "Paste your email. Get a score, a breakdown by category, and the exact fixes — based on data from Boomerang, Yesware, and Outreach. No guessing. No sign-up.",
     price:  "Free. Always.",
-    cta:    "Open the Library",
-    href:   "/shop",
+    cta:    "Check My Email",
+    href:   "/tools/cold-email",
     photo:  "/dr-standing.jpg",
     pos:    "center top",
     accent: "#D4580A",

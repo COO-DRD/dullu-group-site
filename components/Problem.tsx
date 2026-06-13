@@ -10,42 +10,42 @@ const leaks = [
     title: "The Manual Follow-Up",
     body:  "Your best rep is spending 3 hours a day on follow-ups that a $0 automation could handle. Every hour in a spreadsheet is an hour not selling.",
     cta:   "Get the automation",
-    href:  "/shop",
+    href:  "/tools/cold-email",
   },
   {
     n:    "02",
     title: "The Disconnected Stack",
     body:  "CRM in one tab, email platform in another, lead data in a third. Nothing triggers anything. Every handoff is manual. Every update is a copy-paste.",
     cta:   "Connect the stack",
-    href:  "/shop",
+    href:  "/tools/cold-email",
   },
   {
     n:    "03",
     title: "The Reporting Trap",
     body:  "3 hours every Monday to pull numbers that should generate themselves. The people who should be making strategy are making spreadsheets.",
     cta:   "Automate the report",
-    href:  "/shop",
+    href:  "/tools/cold-email",
   },
   {
     n:    "04",
     title: "The Leaky Funnel",
     body:  "Leads go cold between touchpoints. No trigger-based nurture, no re-engagement sequence, no alert when a prospect goes quiet. Revenue disappears silently.",
     cta:   "Plug the leak",
-    href:  "/shop",
+    href:  "/tools/cold-email",
   },
   {
     n:    "05",
     title: "The Content Bottleneck",
     body:  "One person writing every email, every follow-up sequence, every post manually. The pipeline stalls when they are overwhelmed — which is always.",
     cta:   "Build the machine",
-    href:  "/shop",
+    href:  "/tools/cold-email",
   },
   {
     n:    "06",
     title: "The Budget Ceiling",
     body:  "Can't hire. Can't scale manually. Stuck between what a lean team can physically do and what the revenue target demands. Automation is the only way through.",
     cta:   "See what's possible",
-    href:  "/shop",
+    href:  "/tools/cold-email",
   },
 ];
 
@@ -174,11 +174,11 @@ export default function Problem() {
       {/* Section footer CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
         <Link
-          href="/shop"
+          href="/tools/cold-email"
           className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-10 py-5 inline-block transition-all hover:brightness-110"
           style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
         >
-          Get the free resources <Arr />
+          Try the Free Tools <Arr />
         </Link>
       </div>
 

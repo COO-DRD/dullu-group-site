@@ -149,11 +149,11 @@ export default function Hero() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/shop"
+              href="/tools/cold-email"
               className="font-sans font-bold text-[11px] tracking-[0.22em] uppercase px-9 py-4 transition-all hover:brightness-110"
               style={{ backgroundColor: "#D4580A", color: "#FFFFFF" }}
             >
-              Get the Free Library <Arr />
+              Try the Free Tools <Arr />
             </Link>
             <Link
               href="/office"
