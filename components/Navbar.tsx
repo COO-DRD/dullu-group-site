@@ -6,7 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import Arr from "@/components/Arr";
 
 const TYAF_LINKS = [
-  { label: "WhatsApp Channel", href: "https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p" },
+  { label: "WhatsApp Channel", href: "https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p" },
   { label: "YouTube",          href: "https://www.youtube.com/@Dr_Dullu" },
   { label: "LinkedIn",         href: "https://www.linkedin.com/in/drdullu/" },
   { label: "Instagram",        href: "https://www.instagram.com/dr.dullu/" },

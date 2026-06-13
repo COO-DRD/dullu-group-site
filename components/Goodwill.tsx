@@ -71,7 +71,7 @@ export default function Goodwill() {
         </p>
 
         <a
-          href="https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p"
+          href="https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-widest mb-10 transition-opacity hover:opacity-70"

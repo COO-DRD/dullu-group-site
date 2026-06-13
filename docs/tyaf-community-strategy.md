@@ -121,7 +121,7 @@ People who do a thing together and learn through doing it retain far better than
 
 ```
 LAYER 1 — Public Channel (exists)
-  URL: https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p
+  URL: https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p
   One-way broadcast. Anyone can follow.
   Content: tool drops, case studies, weekly insights, community wins
   Purpose: reach and top-of-funnel acquisition

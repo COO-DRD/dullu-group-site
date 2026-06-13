@@ -123,7 +123,7 @@ export default function ApplyForm() {
               Check your inbox — a confirmation is on its way.
             </p>
             <a
-              href="https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p"
+              href="https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p"
               target="_blank"
               rel="noopener noreferrer"
               className="font-sans font-bold text-[11px] tracking-[0.2em] uppercase px-8 py-4 inline-block transition-all hover:brightness-110"

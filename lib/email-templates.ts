@@ -27,7 +27,7 @@ const CTA = (href: string, text: string) =>
 const GHOST_CTA = (href: string, text: string) =>
   `<a href="${href}" style="display:inline-block;border:1px solid #D4580A;color:#D4580A;padding:13px 28px;text-decoration:none;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;font-family:Arial,sans-serif;font-weight:700;">${text}</a>`;
 
-const WA_COMMUNITY = "https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p";
+const WA_COMMUNITY = "https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p";
 
 // ── Newsletter welcome ────────────────────────────────────────────────────────
 
@@ -727,7 +727,7 @@ export function applicationConfirmationHtml(name: string): string {
       In the meantime, the public channel is where the tools, case studies, and weekly drops live.
       Follow it while you wait.
     </p>
-    ${GHOST_CTA("https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p", "Follow the Channel")}
+    ${GHOST_CTA("https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p", "Follow the Channel")}
     <p style="font-size:13px;color:#999999;margin:20px 0 0;font-family:Arial,sans-serif;">
       Questions? Reply to this email.
     </p>

@@ -22,7 +22,7 @@ const panels = [
     body:    "Founders who share what they learn, no gatekeeping. If the work helps you, send goodwill — it keeps the free stuff coming. Your name goes in the credits of everything built from here.",
     price:  "Free to join",
     cta:    "Join the Community",
-    href:   "https://whatsapp.com/channel/0029VbCyuTQGuflzlFkQ2f0p",
+    href:   "https://whatsapp.com/channel/0029VbCyuTQGufIzlFkQ2f0p",
     photo:  "/dr-seated.jpg",
     pos:    "center 20%",
     accent: "#1B3D8F",
