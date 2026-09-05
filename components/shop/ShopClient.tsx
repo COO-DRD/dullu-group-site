@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 import type { Product } from "@/app/shop/page";
 import { useAuth } from "@/context/AuthContext";
@@ -23,6 +23,25 @@ export function ShopClient({ products: initial }: { products: Product[] }) {
   const [products, setProducts] = useState<Product[]>(initial);
   const [loading, setLoading]   = useState(initial.length === 0);
   const { user }                = useAuth();
+
+  // Sliding tab indicator
+  const tabRefs                 = useRef<(HTMLButtonElement | null)[]>([]);
+  const [ind, setInd]           = useState({ left: 0, width: 0, ready: false });
+
+  // Measure before first paint so there's no positional flash
+  useLayoutEffect(() => {
+    const el = tabRefs.current[0];
+    if (!el) return;
+    setInd({ left: el.offsetLeft, width: el.offsetWidth, ready: true });
+  }, []);
+
+  // Animate indicator on tab change
+  useEffect(() => {
+    const idx = TABS.findIndex((t) => t.key === tab);
+    const el  = tabRefs.current[idx];
+    if (!el) return;
+    setInd({ left: el.offsetLeft, width: el.offsetWidth, ready: true });
+  }, [tab]);
 
   useEffect(() => {
     if (initial.length > 0) return;
@@ -75,19 +94,36 @@ export function ShopClient({ products: initial }: { products: Product[] }) {
         )}
       </div>
 
-      {/* Tabs */}
+      {/* Tabs with sliding indicator */}
       <div
-        className="flex gap-0 mb-10 border-b"
+        className="relative flex gap-0 mb-10 border-b"
         style={{ borderColor: "#F0EDE8" }}
       >
-        {TABS.map((t) => (
+        {/* Sliding underline — animates between tabs */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: -1,
+            height: 2,
+            backgroundColor: "#D4580A",
+            left: ind.left,
+            width: ind.width,
+            transition: ind.ready
+              ? "left 200ms cubic-bezier(0.23,1,0.32,1), width 200ms cubic-bezier(0.23,1,0.32,1)"
+              : "none",
+          }}
+        />
+        {TABS.map((t, i) => (
           <button
             key={t.key}
+            ref={(el) => { tabRefs.current[i] = el; }}
             onClick={() => setTab(t.key)}
-            className="px-5 py-3 font-sans text-[10px] font-semibold tracking-[0.18em] uppercase transition-colors cursor-pointer border-b-2 -mb-px"
+            className="btn-press px-5 py-3 font-sans text-[10px] font-semibold tracking-[0.18em] uppercase cursor-pointer"
             style={{
-              color:       tab === t.key ? "#D4580A" : "#888888",
-              borderColor: tab === t.key ? "#D4580A" : "transparent",
+              color:      tab === t.key ? "#D4580A" : "#888888",
+              transition: "color 150ms ease",
+              background: "none",
+              border:     "none",
             }}
           >
             {t.label}
