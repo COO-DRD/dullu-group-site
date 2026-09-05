@@ -142,6 +142,94 @@ input:focus-visible, textarea:focus-visible {
   outline-offset: 0;
 }
 
+/* ── Homepage alive layer ──────────────────────────────────────────────── */
+/* .rv = homepage reveal. Contents are visible by default (no-JS safe);
+   once .js is set on <html> they start hidden and reveal on scroll. */
+
+.js .rv {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.js .rv.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Infinite brand ticker */
+@keyframes ticker-move {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-move 30s linear infinite;
+}
+.ticker-wrap:hover .ticker-track { animation-play-state: paused; }
+
+/* Image lift on hover */
+.img-zoom {
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .img-zoom:hover { transform: scale(1.04); }
+}
+
+/* Receipt rows — wash + number reaction on hover */
+.receipt-row {
+  transition: background-color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.receipt-row:hover {
+  background-color: #F8F5EB;
+}
+.receipt-row .receipt-num {
+  display: inline-block;
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+              color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.receipt-row:hover .receipt-num {
+  transform: translateX(4px) rotate(-4deg);
+  color: #1B3D8F;
+}
+@media (max-width: 767px) { .receipt-row:hover { background-color: transparent; } }
+
+/* Nav underline grow */
+.navlink {
+  position: relative;
+}
+.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.4rem;
+  height: 2px;
+  background: #D4580A;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .navlink:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Work card lift */
+.work-card {
+  transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .work-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(17, 17, 17, 0.10);
+  }
+}
+
 /* ── Mobile photo adjustments ──────────────────────────────────────────── */
 
 @media (max-width: 767px) {
@@ -154,11 +242,19 @@ input:focus-visible, textarea:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .reveal-grid > * {
+  .reveal-grid > *,
+  .rv {
     opacity: 1;
     transform: none;
     transition: none;
   }
+  .js .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .ticker-track { animation: none; }
+  .img-zoom { transition: none; }
   .btn-press {
     transition: none;
   }

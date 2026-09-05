@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { track } from "@/lib/analytics";
 
 const THRESHOLDS = [25, 50, 75, 100];
 
 export default function ScrollTracker() {
+  // Mark the page as JS-capable before first paint so reveals start hidden
+  // only when motion is actually available (no-JS/noscript stays fully visible).
+  useLayoutEffect(() => {
+    document.documentElement.classList.add("js");
+  }, []);
+
   useEffect(() => {
     const fired = new Set<number>();
     let rafId: number | null = null;

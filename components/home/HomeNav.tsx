@@ -16,13 +16,19 @@ export default function HomeNav() {
         borderBottom: "1px solid #F0EDE8",
       }}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-3 sm:gap-6">
         <a
           href="#top"
-          className="font-cinematic font-bold tracking-[0.14em] uppercase inline-flex items-center min-h-[44px] whitespace-nowrap"
+          className="font-cinematic font-bold tracking-[0.14em] uppercase inline-flex items-center min-h-[44px] whitespace-nowrap transition-colors"
           style={{ fontSize: "1.15rem", color: "#111111", textDecoration: "none" }}
         >
-          Ian Dullu
+          <span>DR.DULLU</span>
+          <span
+            className="hidden min-[490px]:inline font-sans font-semibold normal-case tracking-[0.22em]"
+            style={{ fontSize: "0.5rem", color: "#D4580A", marginLeft: "0.6em", marginTop: "0.35em" }}
+          >
+            IAN DULLU
+          </span>
         </a>
 
         <div className="hidden md:flex items-center gap-6">
@@ -30,7 +36,7 @@ export default function HomeNav() {
             <a
               key={link.href}
               href={link.href}
-              className="font-sans text-sm font-medium inline-flex items-center min-h-[44px] px-3 transition-colors hover:text-amber"
+              className="navlink font-sans text-sm font-medium inline-flex items-center min-h-[44px] px-3 transition-colors hover:text-amber"
               style={{ color: "#111111", textDecoration: "none" }}
             >
               {link.label}
@@ -41,9 +47,8 @@ export default function HomeNav() {
         <ManagedRunLink
           location="nav"
           label="The Managed Run →"
-          className="ghost-btn cursor-pointer font-sans font-bold text-sm whitespace-nowrap"
+          className="ghost-btn cursor-pointer font-sans font-bold whitespace-nowrap px-[1.05rem] sm:px-[1.4rem] text-[0.8rem] sm:text-sm"
           style={{
-            padding: "0.85rem 1.4rem",
             minHeight: 44,
             display: "inline-flex",
             alignItems: "center",
@@ -52,6 +57,8 @@ export default function HomeNav() {
             background: "transparent",
             textDecoration: "none",
             boxSizing: "border-box",
+            paddingTop: "0.7rem",
+            paddingBottom: "0.7rem",
           }}
         />
       </div>

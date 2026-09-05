@@ -20,10 +20,12 @@ export default function HomeFooter() {
       <div className="max-w-6xl mx-auto px-6 pt-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           <div>
-            <p className="font-cinematic font-bold mb-2" style={{ fontSize: "1.5rem", color: "#FFFFFF" }}>
-              Ian Dullu
+            <p className="font-cinematic font-bold mb-1" style={{ fontSize: "1.7rem", color: "#FFFFFF", letterSpacing: "0.04em" }}>
+              DR.DULLU
             </p>
             <p className="font-sans text-sm leading-relaxed" style={{ color: "rgba(248,245,235,0.7)" }}>
+              Ian Dullu
+              <br />
               Mombasa, Kenya
               <br />
               Working across East Africa and remotely
@@ -48,7 +50,7 @@ export default function HomeFooter() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-sans text-sm inline-flex items-center min-h-[44px] py-3"
+                    className="font-sans text-sm inline-flex items-center min-h-[44px] py-3 transition-colors hover:text-amber"
                     style={{ color: "rgba(248,245,235,0.8)", textDecoration: "none" }}
                   >
                     {item.label}
@@ -57,7 +59,7 @@ export default function HomeFooter() {
                   <a
                     key={item.label}
                     href={item.href}
-                    className="font-sans text-sm inline-flex items-center min-h-[44px] py-3"
+                    className="font-sans text-sm inline-flex items-center min-h-[44px] py-3 transition-colors hover:text-amber"
                     style={{ color: "rgba(248,245,235,0.8)", textDecoration: "none" }}
                   >
                     {item.label}
@@ -81,7 +83,7 @@ export default function HomeFooter() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-sm inline-flex items-center min-h-[44px] py-3"
+                  className="font-sans text-sm inline-flex items-center min-h-[44px] py-3 transition-colors hover:text-amber"
                   style={{ color: "rgba(248,245,235,0.8)", textDecoration: "none" }}
                 >
                   {item.label}
