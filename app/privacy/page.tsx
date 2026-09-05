@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — DR.DULLU",
-  description: "How DR.DULLU collects and uses your personal data.",
-  alternates: { canonical: "https://dullugroup.co.ke/privacy" },
+  title: "Privacy — Ian Dullu",
+  description: "How dullugroup.co.ke collects and uses personal data.",
+  alternates: { canonical: "https://www.dullugroup.co.ke/privacy" },
 };
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (

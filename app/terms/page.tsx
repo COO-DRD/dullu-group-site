@@ -4,9 +4,9 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions — DR.DULLU",
-  description: "Terms and conditions for purchasing digital products from the DR.DULLU shop.",
-  alternates: { canonical: "https://dullugroup.co.ke/terms" },
+  title: "Terms — Ian Dullu",
+  description: "Terms of use for dullugroup.co.ke.",
+  alternates: { canonical: "https://www.dullugroup.co.ke/terms" },
 };
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (

@@ -18,25 +18,26 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "DR.DULLU — Ian Dullu, founder & sales systems builder, Mombasa",
+  title: "Ian Dullu — Student 156 of 156. Weekly letter.",
   description:
-    "DR.DULLU is Ian Dullu — founder of DDi by Dullu Group, Mombasa. Four years in business at 19. Documenting every system, every cost, every failure — weekly.",
-  metadataBase: new URL("https://dullugroup.co.ke"),
+    "I searched “how to use a computer” on YouTube. Four years later I run a sales agency from Mombasa. The Young African Founder — free, weekly. Unsubscribe anytime.",
+  metadataBase: new URL("https://www.dullugroup.co.ke/"),
+  alternates: { canonical: "https://www.dullugroup.co.ke/" },
   openGraph: {
-    title: "DR.DULLU — Ian Dullu, founder & sales systems builder, Mombasa",
+    title: "I was student 156 out of 156.",
     description:
-      "DR.DULLU is Ian Dullu — founder of DDi by Dullu Group, Mombasa. Four years in business at 19. Documenting every system, every cost, every failure — weekly.",
-    url: "https://dullugroup.co.ke",
-    siteName: "DR.DULLU",
-    images: [{ url: "/og-image.jpg", width: 1080, height: 1350 }],
+      "I searched “how to use a computer” on YouTube. Four years later I run a sales agency from Mombasa. The Young African Founder — free, weekly. Unsubscribe anytime.",
+    url: "https://www.dullugroup.co.ke/",
+    siteName: "Ian Dullu",
+    images: [{ url: "/og-1200x630.jpg", width: 1200, height: 630 }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DR.DULLU — Ian Dullu, founder & sales systems builder, Mombasa",
+    title: "I was student 156 out of 156.",
     description:
-      "DR.DULLU is Ian Dullu — founder of DDi by Dullu Group, Mombasa. Four years in business at 19. Documenting every system, every cost, every failure — weekly.",
-    images: ["/og-image.jpg"],
+      "I searched “how to use a computer” on YouTube. Four years later I run a sales agency from Mombasa. The Young African Founder — free, weekly. Unsubscribe anytime.",
+    images: ["/og-1200x630.jpg"],
   },
 };
 

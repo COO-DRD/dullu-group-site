@@ -6,6 +6,42 @@ import ManagedRunLink from "@/components/home/ManagedRunLink";
 import ScrollTracker from "@/components/home/ScrollTracker";
 import Reveal from "@/components/home/Reveal";
 import Arr from "@/components/Arr";
+import JsonLd from "@/components/home/JsonLd";
+
+const homepageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.dullugroup.co.ke/#person",
+      "name": "Ian Dullu",
+      "alternateName": "DR.DULLU",
+      "url": "https://www.dullugroup.co.ke/",
+      "jobTitle": "Founder",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Dullu Digital",
+        "url": "https://digital.dullugroup.co.ke/",
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mombasa",
+        "addressCountry": "KE",
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/drdullu/",
+        "https://cal.com/dr.dullu",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.dullugroup.co.ke/#website",
+      "url": "https://www.dullugroup.co.ke/",
+      "name": "Ian Dullu — The Young African Founder",
+      "publisher": { "@id": "https://www.dullugroup.co.ke/#person" },
+    },
+  ],
+};
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -29,25 +65,12 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-function TickerWord({ children }: { children: React.ReactNode }) {
-  return <span className="px-6">{children}</span>;
-}
-
-function TickerDot() {
-  return (
-    <span
-      aria-hidden
-      className="w-1.5 h-1.5 rounded-full shrink-0"
-      style={{ backgroundColor: "#D4580A" }}
-    />
-  );
-}
-
 export default function Home() {
   return (
     <>
       <HomeNav />
       <ScrollTracker />
+      <JsonLd data={homepageJsonLd} />
       <main>
         {/* ───────────────────────── SECTION 1 · HERO ───────────────────────── */}
         <section id="top" className="scroll-mt-20">
@@ -167,44 +190,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ──────────────────── SECTION 2 · BRAND TICKER ──────────────────── */}
-        <section
-          className="ticker-wrap"
-          style={{
-            borderTop: "1px solid #111111",
-            borderBottom: "1px solid #111111",
-            backgroundColor: "#111111",
-            overflow: "hidden",
-          }}
-        >
-          <div className="ticker-track" style={{ padding: "0.95rem 0" }}>
-            {[0, 1].map((half) => (
-              <span
-                key={half}
-                aria-hidden={half === 1}
-                className="flex shrink-0 items-center font-sans text-[11px] font-medium uppercase tracking-[0.2em] whitespace-nowrap"
-                style={{ color: "#F8F5EB" }}
-              >
-                <TickerWord>DR.DULLU</TickerWord>
-                <TickerDot />
-                <TickerWord>The Young African Founder</TickerWord>
-                <TickerDot />
-                <TickerWord>4 years in business at 19</TickerWord>
-                <TickerDot />
-                <TickerWord>Bombolulu → Kizingo → Kilifi → Mombasa</TickerWord>
-                <TickerDot />
-                <TickerWord>Knowledge. Audacity. Empire.</TickerWord>
-                <TickerDot />
-                <TickerWord>Every system · every cost · every failure</TickerWord>
-                <TickerDot />
-                <TickerWord>Self-funded. No VC. No safety net.</TickerWord>
-                <TickerDot />
-              </span>
-            ))}
-          </div>
-        </section>
-
-        {/* ───────────────────────── SECTION 3 · THE STORY ───────────────────────── */}
+        {/* ───────────────────────── SECTION 2 · THE STORY ───────────────────────── */}
         <section id="story" className="scroll-mt-20" style={{ backgroundColor: "#F8F5EB" }}>
           <div className="max-w-6xl mx-auto px-6 py-20 md:py-20">
             <div className="grid grid-cols-1 md:grid-cols-[11fr_9fr] gap-12 md:gap-20 items-start">

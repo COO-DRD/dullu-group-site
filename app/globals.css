@@ -157,18 +157,6 @@ input:focus-visible, textarea:focus-visible {
   transform: translateY(0);
 }
 
-/* Infinite brand ticker */
-@keyframes ticker-move {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker-move 30s linear infinite;
-}
-.ticker-wrap:hover .ticker-track { animation-play-state: paused; }
-
 /* Image lift on hover */
 .img-zoom {
   transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -253,7 +241,6 @@ input:focus-visible, textarea:focus-visible {
     transform: none;
     transition: none;
   }
-  .ticker-track { animation: none; }
   .img-zoom { transition: none; }
   .btn-press {
     transition: none;
