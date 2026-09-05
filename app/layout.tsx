@@ -7,36 +7,35 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   display: "swap",
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "700"],
 });
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["500", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "DR.DULLU — Weapons for African Founders",
+  title: "Ian Dullu — I build sales systems for East African firms",
   description:
-    "One person building a multinational-style operation from Kenya under $100/month. Playbooks, automation systems, and tools for East African business owners who want to stop doing everything manually.",
+    "Founder of DDi by Dullu Group, Mombasa. Four years in business at 19. Documenting every system, every cost, every failure — weekly.",
   metadataBase: new URL("https://dullugroup.co.ke"),
   openGraph: {
-    title: "DR.DULLU — Weapons for African Founders",
+    title: "Ian Dullu — I build sales systems for East African firms",
     description:
-      "You don't need a big budget to build big systems. You need the right weapons.",
+      "Founder of DDi by Dullu Group, Mombasa. Four years in business at 19. Documenting every system, every cost, every failure — weekly.",
     url: "https://dullugroup.co.ke",
-    siteName: "DR.DULLU",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    siteName: "Ian Dullu",
+    images: [{ url: "/og-image.jpg", width: 1080, height: 1350 }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DR.DULLU — Weapons for African Founders",
+    title: "Ian Dullu — I build sales systems for East African firms",
     description:
-      "You don't need a big budget to build big systems. You need the right weapons.",
+      "Founder of DDi by Dullu Group, Mombasa. Four years in business at 19. Documenting every system, every cost, every failure — weekly.",
     images: ["/og-image.jpg"],
   },
 };

@@ -125,11 +125,11 @@ export default function Footer() {
               Privacy Policy
             </Link>
             <a
-              href="mailto:shop@dullugroup.co.ke"
+              href="mailto:partners@dullugroup.co.ke"
               className="font-sans text-xs font-light transition-colors hover:text-amber"
               style={{ color: "#AAAAAA" }}
             >
-              shop@dullugroup.co.ke
+              partners@dullugroup.co.ke
             </a>
           </div>
         </div>

@@ -423,22 +423,6 @@ export default function ColdEmailChecker() {
             </div>
           </div>
 
-          {/* Goodwill nudge */}
-          <div style={{ backgroundColor: "#FAFAF8", borderTop: "1px solid #F0EDE8" }}>
-            <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <p className="font-sans font-light text-sm" style={{ color: "#888888", maxWidth: "28rem" }}>
-                This tool is free. If it helped you, a small goodwill tip keeps it running.
-              </p>
-              <a
-                href="/#goodwill"
-                className="font-sans font-bold text-[11px] tracking-[0.18em] uppercase px-6 py-3 transition-all hover:brightness-110 shrink-0"
-                style={{ backgroundColor: "#F0EDE8", color: "#D4580A" }}
-              >
-                Send Goodwill
-              </a>
-            </div>
-          </div>
-
         </div>
       )}
     </div>

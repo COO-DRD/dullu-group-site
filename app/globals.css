@@ -12,6 +12,10 @@
 
   --font-sans:        var(--font-montserrat, "Montserrat", sans-serif);
   --font-cinematic:   var(--font-cormorant, "Cormorant Garamond", serif);
+
+  /* Named easing curves — use these everywhere */
+  --ease-out:         cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out:      cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 html { scroll-behavior: smooth; }
@@ -24,7 +28,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Photo entrance — plays once on load */
+/* ── Keyframes ─────────────────────────────────────────────────────────── */
+
+/* Hero photo breathe — first-time, 1.6s is fine */
 @keyframes photo-breathe {
   from { opacity: 0; transform: scale(1.06) translateY(-8px); }
   to   { opacity: 1; transform: scale(1.03) translateY(0px); }
@@ -42,40 +48,125 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Scroll-reveal for below-the-fold sections */
+/* Step fade — CheckoutModal form → processing → success → error */
+@keyframes step-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────────────────── */
+/* 0.8s was too slow. 0.55s with strong ease-out feels instant but smooth. */
+
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Staggered grid children */
+/* Staggered grid children — 0.65s → 0.45s, tighter delays */
 .reveal-grid > * {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(14px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-grid.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.04s; }
-.reveal-grid.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.13s; }
-.reveal-grid.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.22s; }
-.reveal-grid.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.31s; }
-.reveal-grid.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.40s; }
-.reveal-grid.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.49s; }
+.reveal-grid.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.10s; }
+.reveal-grid.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
+.reveal-grid.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.22s; }
+.reveal-grid.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.28s; }
+.reveal-grid.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.34s; }
 
-/* Input focus */
+/* ── Button press feedback ─────────────────────────────────────────────── */
+/* Apply .btn-press to any tappable surface. Gives instant physical feedback. */
+
+.btn-press {
+  transition: transform 140ms cubic-bezier(0.23, 1, 0.32, 1),
+              filter 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+/* Gate hover effects — touch devices fire hover on tap, causing false positives */
+@media (hover: hover) and (pointer: fine) {
+  .btn-press:hover {
+    filter: brightness(1.08);
+  }
+}
+
+/* ── Step transition (CheckoutModal) ───────────────────────────────────── */
+
+.step-enter {
+  animation: step-in 200ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* ── Outline-to-fill button (Problem.tsx leak CTAs) ───────────────────── */
+/* Only animates on devices that actually hover — prevents sticky states on touch */
+
+.leak-cta {
+  transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1),
+              color 160ms cubic-bezier(0.23, 1, 0.32, 1),
+              transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .leak-cta:hover {
+    background-color: #D4580A !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* ── Ghost (outline) CTA — secondary conversion ────────────────────── */
+/* Used by The Managed Run links across the homepage. Hover only on fine pointers. */
+
+.ghost-btn {
+  transition: background-color 160ms cubic-bezier(0.23, 1, 0.32, 1),
+              color 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .ghost-btn:hover {
+    background-color: #111111;
+    color: #FFFFFF;
+  }
+}
+
+/* ── Input focus ───────────────────────────────────────────────────────── */
+
 input:focus-visible, textarea:focus-visible {
   outline: 2px solid #D4580A;
   outline-offset: 0;
 }
 
-/* Mobile photo adjustments — reduce the zoomed-in feel on portrait screens */
+/* ── Mobile photo adjustments ──────────────────────────────────────────── */
+
 @media (max-width: 767px) {
-  .hero-photo     { object-position: 50% 30% !important; }
+  .hero-photo      { object-position: 50% 30% !important; }
   .about-landscape { background-position: 40% center !important; }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────── */
+/* Remove movement, keep opacity fades that aid comprehension */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-grid > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .btn-press {
+    transition: none;
+  }
+  .btn-press:active {
+    transform: none;
+  }
+  .step-enter {
+    animation: none;
+    opacity: 1;
+  }
 }
